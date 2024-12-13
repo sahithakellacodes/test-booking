@@ -12,7 +12,7 @@ const Layout = ({children}) => {
       {/* <div className="container mx-auto">
         <SearchBar />
       </div> */}
-      <div className="mx-28 py-10 px-36 flex-1">{children}</div>
+      <div className="py-10 px-48 flex-1">{children}</div>
       <Footer />
     </div>
   );

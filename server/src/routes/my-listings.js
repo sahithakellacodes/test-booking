@@ -5,6 +5,7 @@ import "dotenv/config";
 import Listing from "../models/listing.js";
 import verifyToken from "../middleware/auth.js";
 import { check, body, validationResult } from "express-validator";
+import { json } from "stream/consumers";
 
 const router = express.Router({ mergeParams: true });
 router.use(express.json());
@@ -56,28 +57,21 @@ router.post(
 
       // Get the image files and listing info from the request
       const imageFiles = req.files;
-      const listingInfo = {...req.body};
+      const listingInfo = { ...req.body };
       console.log("info: ", listingInfo);
       console.log("cloudinary: ", cloudinary.config());
-      
+
       cloudinary.config({
         cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
         api_key: process.env.CLOUDINARY_API_KEY,
         api_secret: process.env.CLOUDINARY_API_SECRET,
       });
-      
+
       // Debug: Check Cloudinary config
       console.log("Cloudinary Config:", cloudinary.config());
 
       // Upload the images to cloudinary and get the image URLs
-      const uploadPromises = imageFiles.map(async (imageFile) => {
-        const b64Image = imageFile.buffer.toString("base64");
-        let imageURI = "data:" + imageFile.mimetype + ";base64," + b64Image;
-        const result = await cloudinary.v2.uploader.upload(imageURI);
-        return result.url;
-      });
-
-      const imageURLs = await Promise.all(uploadPromises);
+      const imageURLs = await uploadImageFiles(imageFiles);
 
       // Save the listing info to the database
       listingInfo.images = imageURLs;
@@ -87,7 +81,6 @@ router.post(
 
       const listing = new Listing(listingInfo);
       await listing.save();
-      console.log("Listing save await successfully!");
       res.status(201).json({ message: "Listing created successfully!" });
     } catch (error) {
       console.log("error creating listing: ", error);
@@ -105,5 +98,92 @@ router.get("/", verifyToken, async (req, res) => {
     res.status(500).json({ message: "Something went wrong!" });
   }
 });
+
+// Get one listing
+router.get(
+  "/:id",
+  verifyToken,
+  upload.array("imageFiles", 6),
+  async (req, res) => {
+    try {
+      const listing = await Listing.findOne({
+        _id: req.params.id,
+        userId: req.userId,
+      });
+      if (!listing) {
+        return res.status(404).json({ message: "Listing not found" });
+      }
+
+      res.status(200).json(listing);
+    } catch (err) {
+      return res.status(500).json({ message: "Something went wrong" });
+    }
+  }
+);
+
+// Update a listing
+router.put(
+  "/:id",
+  verifyToken,
+  upload.array("imageFiles"),
+  async (req, res) => {
+    try {
+      // Get updated listings from the request body and update DB
+      const updatedListing = req.body;
+      console.log("Updated Listing: ", updatedListing);
+      updatedListing.lastUpdated = new Date();
+      const listing = await Listing.findOneAndUpdate(
+        { _id: req.params.id, userId: req.userId },
+        updatedListing,
+        { new: true }
+      );
+
+      if (!listing) {
+        return res.status(404).json({ message: "Listing not found" });
+      }
+
+      cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+      });
+
+      // Get any additional files that the user uploaded
+      const imageFiles = req.files;
+      if (imageFiles && imageFiles.length > 0) {
+        const imageURLs = await uploadImageFiles(imageFiles);
+        console.log("imageURLs: ", imageURLs);
+
+        // Add to the existing images object in DB (... is a spread operator)
+        // [] is handling the case where the user deletes all existing images
+        if (imageURLs.length > 0) {
+          // Combine new and existing images
+          listing.images = [...imageURLs, ...listing.images];
+        }
+      }
+
+      console.log("Updated Listing with new images: ", listing.images);
+      await listing.save();
+      res
+        .status(201)
+        .json({ message: "Listing updated successfully!", data: listing });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Something went wrong!" });
+    }
+  }
+);
+
+async function uploadImageFiles(imageFiles) {
+  const uploadPromises = imageFiles.map(async (imageFile) => {
+    const b64Image = imageFile.buffer.toString("base64");
+    let imageURI = "data:" + imageFile.mimetype + ";base64," + b64Image;
+    const result = await cloudinary.v2.uploader.upload(imageURI);
+    return result.url;
+  });
+
+  const imageURLs = await Promise.all(uploadPromises);
+  return imageURLs;
+}
 
 export default router;

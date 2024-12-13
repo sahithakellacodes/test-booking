@@ -75,7 +75,7 @@ const Login = () => {
         <p className="font-light text-xs">Don't have an account? <a href="/user/register"><u>register</u></a> instead</p>
         <button
           type="submit"
-          className="bg-black text-white p-2 rounded-sm font-bold text-xs"
+          className="bg-black text-white p-2 px-4 rounded-full"
         >
           Login
         </button>

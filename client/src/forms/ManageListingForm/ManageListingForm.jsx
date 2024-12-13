@@ -5,15 +5,27 @@ import BasicDetails from "./BasicDetails";
 import TypeSection from "./TypeSection";
 import FacilitiesSection from "./FacilitiesSection";
 import ImagesSection from "./ImagesSection";
+import { useEffect } from "react";
 
-const ManageListingForm = ({ onSave, isLoading }) => {
+const ManageListingForm = ({ onSave, isLoading, listingDetails }) => {
   // Get all the hooks we need
   const formMethods = useForm();
-  const { handleSubmit } = formMethods;
+  const { handleSubmit, reset } = formMethods;
+
+  // Whenever ManageListingForm receives new listingDetails, it will reset the form data
+  // Since we added listingDetails as a dependency, the useEffect hook will run whenever listingDetails changes
+  useEffect(() => {
+    if (listingDetails) {
+      reset(listingDetails);
+    }
+  }, [listingDetails, reset]);
 
   const onSubmit = handleSubmit((data) => {
     // Create a form data object to send to the server
     const formData = new FormData();
+    if (listingDetails) {
+      formData.append("userId", listingDetails.userId);
+    }
     formData.append("name", data.name);
     formData.append("city", data.city);
     formData.append("country", data.country);
@@ -28,6 +40,13 @@ const ManageListingForm = ({ onSave, isLoading }) => {
     data.facilities.forEach((facility, index) =>
       formData.append(`facilities[${index}]`, facility)
     );
+
+    // ????
+    if (formData.imageFiles) {
+      formData.imageFiles.forEach((url, index) => {
+        formData.append(`imageFiles[${index}]`, url);
+      });
+    }
 
     // Append each image file to the form data
     Array.from(data.imageFiles).forEach((imgFile) => {
@@ -58,7 +77,7 @@ const ManageListingForm = ({ onSave, isLoading }) => {
             // Disable the button if the form is submitting
             disabled={isLoading}
             type="submit"
-            className="bg-black text-white p-2 rounded-sm font-bold text-sm disabled:opacity-50"
+            className="bg-black text-white p-2 px-4 rounded-full disabled:opacity-50"
           >
             {isLoading ? "Saving..." : "Save"}
           </button>

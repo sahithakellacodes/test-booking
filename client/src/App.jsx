@@ -6,6 +6,9 @@ import Login from "./pages/auth/Login";
 import AddListing from "./pages/listings/AddListing";
 import MyListing from "./pages/listings/MyListing";
 import { useAppContext } from "./contexts/AppContext";
+import EditListing from "./pages/listings/EditListing";
+import SearchBar from "./components/SearchBar";
+import Search from "./pages/search/Search";
 
 
 const App = () => {
@@ -19,6 +22,7 @@ const App = () => {
           path="/"
           element={
             <Layout>
+              <SearchBar />
               <p>Home Page</p>
             </Layout>
           }
@@ -47,6 +51,16 @@ const App = () => {
             </Layout>
           }
         />
+        <Route
+          path="/search"
+          element={
+            <Layout>
+              <SearchBar />
+              <Search />
+            </Layout>
+          }
+        />
+
         {isLoggedIn && ( // Routes available only to logged in users
           <>
             <Route
@@ -62,6 +76,14 @@ const App = () => {
               element={
                 <Layout>
                   <MyListing />
+                </Layout>
+              }
+            />
+            <Route
+              path="/listings/edit/:listingId"
+              element={
+                <Layout>
+                  <EditListing />
                 </Layout>
               }
             />

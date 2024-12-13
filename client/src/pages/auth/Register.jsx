@@ -113,7 +113,7 @@ const Register = () => {
         </p>
         <button
           type="submit"
-          className="bg-black text-white p-2 rounded-sm font-bold text-xs"
+          className="bg-black text-white p-2 px-4 rounded-full"
         >
           Create Account
         </button>

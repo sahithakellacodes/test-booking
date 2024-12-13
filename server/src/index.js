@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import userRoutes from "./routes/users.js";
 import authRoutes from "./routes/auth.js";
 import myListingsRoutes from "./routes/my-listings.js";
+import listingsRoutes from "./routes/listings.js";
 import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from "url"; // new in Node.js 13.2.0
@@ -56,6 +57,7 @@ app.use(express.static(path.join(__dirname, "../../client/dist")));
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/myListings", myListingsRoutes);
+app.use("/api/listings", listingsRoutes);
 
 // Catch all routes and serve index.html 
 app.get("*", (req, res) => {
