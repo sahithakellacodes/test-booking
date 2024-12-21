@@ -4,9 +4,10 @@ import Layout from "./layouts/Layout";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import AddListing from "./pages/listings/AddListing";
+import ListingDetails from "./pages/listings/ListingDetails";
+import EditListing from "./pages/listings/EditListing";
 import MyListing from "./pages/listings/MyListing";
 import { useAppContext } from "./contexts/AppContext";
-import EditListing from "./pages/listings/EditListing";
 import SearchBar from "./components/SearchBar";
 import Search from "./pages/search/Search";
 
@@ -57,6 +58,14 @@ const App = () => {
             <Layout>
               <SearchBar />
               <Search />
+            </Layout>
+          }
+        />
+        <Route
+          path="/listing/details/:listingId"
+          element={
+            <Layout>
+              <ListingDetails />
             </Layout>
           }
         />

@@ -26,28 +26,36 @@ const EditListing = () => {
   );
 
   // Update listing by ID
-  const { mutate, isLoading } = useMutation(({listingId, data}) => fetchAPI.updateListingByID(listingId, data), {
-    onSuccess: () => {
-      showToast({ message: "Listing updated successfully!", type: "success" });
-    },
-    onError: (error) => {
-      console.log(error);
-      showToast({ message: "Error updating listing", type: "error" });
-    },
-  });
+  const { mutate, isLoading } = useMutation(
+    ({ listingId, data }) => fetchAPI.updateListingByID(listingId, data),
+    {
+      onSuccess: () => {
+        showToast({
+          message: "Listing updated successfully!",
+          type: "success",
+        });
+      },
+      onError: (error) => {
+        console.log(error);
+        showToast({ message: "Error updating listing", type: "error" });
+      },
+    }
+  );
 
   // Handle save
   const handleSave = (data) => {
-    console.log("DATA IN HANDLE SAVE FXN")
-    for (let pair of data.entries()) {
-      console.log("FormDataOBJ00:", pair[0] + ": " + pair[1]);
-    }
-    mutate({listingId, data});
+    mutate({ listingId, data });
   };
 
   if (!listing) return <div>No listing found.</div>;
 
-  return <ManageListingForm onSave={handleSave} listingDetails={listing} isLoading={isLoading} />;
+  return (
+    <ManageListingForm
+      onSave={handleSave}
+      listingDetails={listing}
+      isLoading={isLoading}
+    />
+  );
 };
 
 export default EditListing;

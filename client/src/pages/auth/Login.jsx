@@ -17,12 +17,15 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const searchParams = new URLSearchParams(location.search);
+  const from = searchParams.get("from") || "/";
+
   // Use useMutation hook to handle data modification (login a user)
   const mutation = useMutation(fetchAPI.login, {
     onSuccess: async () => {
       showToast({ message: "Login successful!", type: "success" });
       await queryClient.invalidateQueries("validateToken"); // Invalidating queries triggers a refetch of the data, ensuring stale data is updated.
-      navigate(location.state?.from?.pathname || "/");
+      navigate(from);
     },
     onError: (error) => {
       showToast({ message: error.message, type: "error" });

@@ -175,3 +175,16 @@ export const searchListings = async (searchParams) => {
   }
   return response.json();
 };
+
+// Get details of a listing by ID API
+export const getListingDetailsById = async (listingId) => {
+  const response = await fetch(`${API_BASE_URL}/api/listings/${listingId}`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error fetching property listing");
+  }
+  return await response.json();
+};

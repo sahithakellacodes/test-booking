@@ -2,7 +2,7 @@ import React from "react";
 
 const Pagination = ({ page_num, total_pages, onPageChange }) => {
   const pageNumbers = [];
-  for (let i = 1; i < total_pages; i++) {
+  for (let i = 1; i <= total_pages; i++) {
     pageNumbers.push(i);
   }
 

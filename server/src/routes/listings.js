@@ -2,15 +2,16 @@ import express from "express";
 import Listing from "../models/listing.js";
 // import constructSearchQuery from "../scripts/constructSearchQuery.js";
 import { pagination_page_size } from "../config.js";
+import { param, validationResult } from "express-validator";
 
 const router = express.Router({ mergeParams: true });
 router.use(express.json());
 
+// Search listings
 router.get("/search", async (req, res) => {
   try {
     // filtering the listings based on the query parameters
     const query = constructSearchQuery(req.query);
-    console.log(query);
 
     // sorting options
     let sortOptions = {};
@@ -55,6 +56,28 @@ router.get("/search", async (req, res) => {
   }
 });
 
+// Get listing by ID
+router.get(
+  "/:listingId",
+  [param("listingId").notEmpty().withMessage("Listing ID is required")],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      const id = req.params.listingId.toString();
+      const listing = await Listing.findById(id);
+      res.status(200).json(listing);
+    } catch (err) {
+      console.log("Get listing by ID error: ", err);
+      res.status(500).json({ message: "Something went wrong!" });
+    }
+  }
+);
+
+// Construct search query based on query parameters
 const constructSearchQuery = (queryParams) => {
   let constructedQuery = {};
 
