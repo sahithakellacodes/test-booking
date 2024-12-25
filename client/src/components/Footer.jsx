@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="flex justify-between bg-black text-white items-center p-4 px-36">
+    <footer className="flex flex-col items-start md:flex-row md:justify-between bg-[#2F3137] text-white md:items-center p-4 py-3 px-8">
       <a href="/listings" aria-label="View listings" className="font-semibold">
         FindMyStay
       </a>

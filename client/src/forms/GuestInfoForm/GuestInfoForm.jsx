@@ -48,8 +48,8 @@ const GuestInfoForm = ({ listingId, price }) => {
     );
     // Redirect to the login page with the current location as the state
     // so that the user can be redirected back to the same page after login
-    // DEBUG: The location.pathname is not being passed to the login page
-    navigate(`/user/login?from=${encodeURIComponent(location.pathname)}`);
+    console.log("location.pathname in guest info form", location.pathname);
+    navigate("/user/login", { state: { from: location.pathname } });
   };
 
   // Form submission when user is signed in: Save the search values and redirect to the booking page
@@ -66,10 +66,10 @@ const GuestInfoForm = ({ listingId, price }) => {
 
   // Return the guest info form
   return (
-    <div className="flex flex-col p-4 bg-blue-200 gap-4">
-      <h3 className="text-md font-bold">INR {price} per night</h3>
+    <div className="flex flex-col p-4 bg-[#13181C] gap-4  rounded-xl">
+      <h3 className="text-md font-bold text-slate-200">INR {price} per night</h3>
       {/* REVIEW: Not sure if this form submission is safe */}
-      <form onSubmit={isLoggedIn ? handleSubmit(onSubmit) : onSignInClick}>
+      <form onSubmit={isLoggedIn ? handleSubmit(onSubmit) : handleSubmit(onSignInClick)}>
         <div className="grid grid-cols-1 gap-4 items-center">
           <div>
             <DatePicker
@@ -103,14 +103,14 @@ const GuestInfoForm = ({ listingId, price }) => {
           </div>
           <div
             id="count"
-            className="p-2 rounded-md flex flex-row justify-between items-center"
+            className="p-2 rounded-md flex flex-row justify-between items-center text-slate-200"
           >
             <i className="fa-solid fa-user mr-2"></i>
             <label className="items-center flex gap-1">
               Adults:
               <input
                 type="number"
-                className="outline-none mx-2"
+                className="outline-none mx-2 text-black"
                 min={1}
                 max={20}
                 {...register("adultCount", {
@@ -127,7 +127,7 @@ const GuestInfoForm = ({ listingId, price }) => {
               Children:
               <input
                 type="number"
-                className="outline-none mx-2"
+                className="outline-none mx-2 text-black"
                 min={0}
                 max={20}
                 {...register("childCount", {
@@ -139,11 +139,11 @@ const GuestInfoForm = ({ listingId, price }) => {
             </label>
           </div>
           {isLoggedIn ? (
-            <button className="bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl">
+            <button className="bg-[#2F3137] rounded-lg text-white h-full p-2 font-bold  text-xl">
               Book Now
             </button>
           ) : (
-            <button className="bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl">
+            <button className="bg-[#2F3137] rounded-lg text-white h-full p-2 font-bold  text-xl">
               Login to Book
             </button>
           )}

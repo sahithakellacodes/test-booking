@@ -10,21 +10,21 @@ import MyListing from "./pages/listings/MyListing";
 import { useAppContext } from "./contexts/AppContext";
 import SearchBar from "./components/SearchBar";
 import Search from "./pages/search/Search";
-
+import Booking from "./pages/bookings/Booking";
+import PageNotFound from "./pages/pagenotfound/PageNotFound";
 
 const App = () => {
   // deconstruct the isLoggedIn state from the context
-  const {isLoggedIn} = useAppContext();
+  const { isLoggedIn } = useAppContext();
 
   return (
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path="/page-not-found"
           element={
             <Layout>
-              <SearchBar />
-              <p>Home Page</p>
+              <PageNotFound />
             </Layout>
           }
         />
@@ -32,6 +32,7 @@ const App = () => {
           path="/"
           element={
             <Layout>
+              <SearchBar />
               <p>Home Page</p>
             </Layout>
           }
@@ -96,11 +97,19 @@ const App = () => {
                 </Layout>
               }
             />
+            <Route
+              path="/listings/:listingId/book"
+              element={
+                <Layout>
+                  <Booking />
+                </Layout>
+              }
+            />
           </>
         )}
 
-        {/* Catch all: Redirect to home page if no route matches */} 
-        <Route path="*" element={<Navigate to="/" />} />
+        {/* Catch all: Redirect to home page if no route matches */}
+        <Route path="*" element={<Navigate to="/page-not-found" />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,6 +1,49 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
+// Define booking Schema
+const bookingSchema = new Schema({
+  userId: {
+    type: String,
+    required: true,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  listingId: {
+    type: String,
+    required: true,
+  },
+  checkIn: {
+    type: Date,
+    required: true,
+  },
+  checkOut: {
+    type: Date,
+    required: true,
+  },
+  adultCount: {
+    type: Number,
+    required: true,
+  },
+  childCount: {
+    type: Number,
+    required: true,
+  },
+  totalPrice: {
+    type: Number,
+    required: true,
+  },
+  lastUpdated: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
 // Define listing Schema
 const listingSchema = new Schema({
@@ -25,7 +68,7 @@ const listingSchema = new Schema({
     required: true,
   },
   type: {
-    type: String, 
+    type: String,
     required: true,
   },
   adultCount: {
@@ -64,6 +107,7 @@ const listingSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  bookings: [bookingSchema], // Embed the booking schema in the listing schema
 });
 
 const Listing = mongoose.model("Listing", listingSchema);

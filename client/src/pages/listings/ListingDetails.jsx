@@ -27,12 +27,11 @@ const ListingDetails = () => {
   // Return the listing details and the guest info form
   return (
     <div>
-      <span>ListingID: {listingId}</span>
       <div className="flex flex-col">
-        <div id="name-and-stars" className="flex justify-between">
-          <h3 className="font-bold text-xl">{data.name}</h3>
+        <div id="name-and-stars" className="flex justify-between mb-3">
+          <h3 className="font-bold text-xl text-[#cac9c9]">{data.name}</h3>
           <span>
-            <i className="mr-4">{data.type}</i>
+            <i className="mr-4 text-[#cac9c9]">{data.type}</i>
             {Array.from({ length: data.propertyRating }).map((_, index) => (
               <i key={index} className="fa-solid fa-star text-yellow-400"></i>
             ))}
@@ -41,7 +40,7 @@ const ListingDetails = () => {
 
         <div
           id="images-and-map"
-          className="grid grid-cols-1 lg:grid-cols-3 gap-4"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4"
         >
           {data.images.slice(0, 2).map((image, index) => (
             <img
@@ -57,10 +56,13 @@ const ListingDetails = () => {
         </div>
 
         <div id="facilities" className="">
-          <ul className="m-1 grid grid-cols-4">
+          <ul className="m-1 grid grid-cols-2 md:grid-cols-4">
             {/* TODO: Add facilities icons */}
             {data.facilities.map((item, index) => (
-              <li key={index} className="m-1 p-2 border rounded-md">
+              <li
+                key={index}
+                className="m-1 p-2 rounded-md border text-slate-200 duration-500 border-[#2F3137] bg-[#2F3137] hover:bg-[#13181C] hover:border-[#174157]"
+              >
                 {item}
               </li>
             ))}
@@ -71,7 +73,10 @@ const ListingDetails = () => {
           id="desc-and-booking"
           className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-3"
         >
-          <div id="description" className="whitespace-pre-line text-justify">
+          <div
+            id="description"
+            className="whitespace-pre-line text-justify text-[#cac9c9]"
+          >
             {data.description}
           </div>
           <div id="booking-card" className="h-fit">

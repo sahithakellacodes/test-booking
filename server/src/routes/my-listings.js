@@ -174,6 +174,22 @@ router.put(
   }
 );
 
+// Delete a listing
+router.delete("/:id", verifyToken, async (req, res) => {
+  try {
+    const listing = await Listing.findOneAndDelete({
+      _id: req.params.id,
+      userId: req.userId,
+    });
+    if (!listing) {
+      return res.status(404).json({ message: "Listing not found" });
+    }
+    res.status(200).json({ message: "Listing deleted successfully!" });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong!" });
+  }
+});
+
 async function uploadImageFiles(imageFiles) {
   const uploadPromises = imageFiles.map(async (imageFile) => {
     const b64Image = imageFile.buffer.toString("base64");

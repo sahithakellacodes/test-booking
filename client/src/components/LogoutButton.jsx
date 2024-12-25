@@ -30,7 +30,7 @@ const LogoutButton = () => {
   // Return the button
   return (
     <button
-      className="text-black bg-white p-2 border-gray-600 rounded-md border-2"
+      className="text-black bg-[#FFFDF2] p-1 px-2 border-[#FFFDF2] rounded-lg border-2"
       onClick={handleClick}
     >
       Logout

@@ -35,77 +35,72 @@ const SearchBar = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-row items-center justify-between p-3 text-sm overflow-hidden"
+      className="flex justify-center bg-[#2F3137] font-semibold text-white items-center text-sm overflow-hidden border-2 border-[#31708e] rounded-lg"
     >
-      <div
-        id="location"
-        className="border p-2 rounded-md flex flex-row gap-1 items-center"
-        value={destination}
-        onChange={(e) => setDestination(e.target.value)}
-      >
-        <i className="fa-solid fa-magnifying-glass"></i>
-        <input
-          type="text"
-          className="outline-none"
-          placeholder="Where are you going?"
-        />
-      </div>
-      <div
-        id="dates"
-        className="border p-2 rounded-md flex flex-row gap-1 items-center"
-      >
-        <i className="fa-solid fa-calendar-days"></i>
-        <DatePicker
-          selected={checkIn}
-          onChange={(date) => setCheckIn(date)}
-          selectsStart
-          startDate={checkIn}
-          endDate={checkOut}
-          minDate={setMinDate}
-          maxDate={setMaxDate}
-          className="focus:outline-none"
-        />
-        <DatePicker
-          selected={checkOut}
-          onChange={(date) => setCheckOut(date)}
-          selectsStart
-          startDate={checkIn}
-          endDate={checkOut}
-          minDate={setMinDate}
-          maxDate={setMaxDate}
-          className="focus:outline-none"
-        />
-      </div>
-      <div
-        id="count"
-        className="border p-2 rounded-md flex flex-row gap-1 items-center"
-      >
-        <i className="fa-solid fa-user mr-2"></i>
-        <label className="items-center flex gap-1">
-          Adults:
+      <div className="flex flex-row justify-between items-center gap-4 p-4">
+        <label className="flex flex-col gap-1 w-96">
+          Search your destination
           <input
-            type="number"
-            className="outline-none mx-2"
-            min={1}
-            max={20}
-            value={adultCount}
-            onChange={(e) => setAdultCount(parseInt(e.target.value))}
+            type="text"
+            className="outline-none font-normal text-black bg-[#FFFDF2] p-2 rounded-md"
+            placeholder="Enter destination or property name"
+            value={destination}
+            onChange={(e) => setDestination(e.target.value)}
           />
         </label>
-        <label className="items-center flex gap-1">
-          Children:
-          <input
-            type="number"
-            className="outline-none mx-2"
-            min={0}
-            max={20}
-            value={childCount}
-            onChange={(e) => setChildCount(parseInt(e.target.value))}
-          />
+        <label className="flex flex-row gap-6">
+          <label className="flex flex-col gap-2 items-start w-40">
+            Check-inㅤ
+            <DatePicker
+              selected={checkIn}
+              onChange={(date) => setCheckIn(date)}
+              selectsStart
+              startDate={checkIn}
+              endDate={checkOut}
+              minDate={setMinDate}
+              maxDate={setMaxDate}
+              className="focus:outline-none outline-none font-normal text-black bg-[#FFFDF2] p-2 rounded-md"
+            />
+          </label>
+          <label className="flex flex-col gap-2 items-start w-40">
+            Check-out
+            <DatePicker
+              selected={checkOut}
+              onChange={(date) => setCheckOut(date)}
+              selectsStart
+              startDate={checkIn}
+              endDate={checkOut}
+              minDate={setMinDate}
+              maxDate={setMaxDate}
+              className="focus:outline-none outline-none font-normal text-black bg-[#FFFDF2] p-2 rounded-md"
+            />
+          </label>
         </label>
-      </div>
-      <div>
-        <button className="border border-black p-2 rounded-md hover:bg-black hover:text-white">
+        <label className="flex flex-row gap-6">
+          <label className="flex flex-col gap-2 items-start">
+            Adults:
+            <input
+              type="number"
+              className="outline-none mx-2 font-normal text-black bg-[#FFFDF2] p-2 rounded-md"
+              min={1}
+              max={20}
+              value={adultCount}
+              onChange={(e) => setAdultCount(parseInt(e.target.value))}
+            />
+          </label>
+          <label className="flex flex-col gap-2 items-start">
+            Children:
+            <input
+              type="number"
+              className="outline-none mx-2 font-normal text-black bg-[#FFFDF2] p-2 rounded-md"
+              min={0}
+              max={20}
+              value={childCount}
+              onChange={(e) => setChildCount(parseInt(e.target.value))}
+            />
+          </label>
+        </label>
+        <button className="border bg-[#FFFDF2] text-black border-black p-2 rounded-md hover:bg-[#f3efda]">
           Search
         </button>
       </div>

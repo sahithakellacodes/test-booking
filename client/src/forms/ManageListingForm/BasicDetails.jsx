@@ -11,12 +11,12 @@ const BasicDetails = () => {
   // Return the form
   return (
     <div className="flex flex-col gap-7">
-      <h2 className="text-2xl font-bold mb-2">List Your Property</h2>
-      <h2 className="text-xl font-bold mb-1">Basic Details</h2>
-      <label className="text-gray-700 text-sm font-bold flex-1">
+      <h2 className="text-2xl text-gray-200 font-bold mb-2">List Your Property</h2>
+      <h2 className="text-xl text-gray-200 font-bold mb-1">Basic Details</h2>
+      <label className="text-gray-200 text-sm font-bold flex-1">
         Property Name
         <input
-          className="border rounded w-full py-1 px-2 font-normal"
+          className="border border-blue-300 text-gray-200 rounded w-full py-1 px-2 font-normal bg-[#202225]"
           {...register("name", { required: "Property name is required" })}
         ></input>
         {errors.name && (
@@ -25,11 +25,11 @@ const BasicDetails = () => {
           </span>
         )}
       </label>
-      <div className="flex flex-row gap-5">
-        <label className="text-gray-700 text-sm font-bold flex-1">
+      <div className="flex flex-col sm:flex-row gap-5">
+        <label className="text-gray-200 text-sm font-bold flex-1">
           City
           <input
-            className="border rounded w-full py-1 px-2 font-normal"
+            className="border border-blue-300 text-gray-200 rounded w-full py-1 px-2 font-normal bg-[#202225]"
             {...register("city", { required: "City is required" })}
           ></input>
           {errors.city && (
@@ -38,10 +38,10 @@ const BasicDetails = () => {
             </span>
           )}
         </label>
-        <label className="text-gray-700 text-sm font-bold flex-1">
+        <label className="text-gray-200 text-sm font-bold flex-1">
           Country
           <input
-            className="border rounded w-full py-1 px-2 font-normal"
+            className="border border-blue-300 text-gray-200 rounded w-full py-1 px-2 font-normal bg-[#202225]"
             {...register("country", { required: "Country is required" })}
           ></input>
           {errors.country && (
@@ -51,11 +51,11 @@ const BasicDetails = () => {
           )}
         </label>
       </div>
-      <label className="text-gray-700 text-sm font-bold flex-1">
+      <label className="text-gray-200 text-sm font-bold flex-1">
         Property Description
         <textarea
           rows={5}
-          className="border rounded w-full py-1 px-2 font-normal"
+          className="border border-blue-300 text-gray-200 rounded w-full py-1 px-2 font-normal bg-[#202225]"
           {...register("description", {
             required: "Property description is required",
           })}
@@ -66,11 +66,11 @@ const BasicDetails = () => {
           </span>
         )}
       </label>
-      <label className="text-gray-700 text-sm font-bold flex-1">
+      <label className="text-gray-200 text-sm font-bold flex-1">
         Property Price <i className="font-normal">(per night)</i>
         <input
           type="number"
-          className="border rounded w-full py-1 px-2 font-normal"
+          className="border border-blue-300 text-gray-200 rounded w-full py-1 px-2 font-normal bg-[#202225]"
           min={1}
           {...register("price", { required: "Property price is required" })}
         ></input>
@@ -81,13 +81,13 @@ const BasicDetails = () => {
         )}
       </label>
       <div className="flex flex-row gap-5">
-        <label className="text-gray-700 text-sm font-bold flex-1">
+        <label className="text-gray-200 text-sm font-bold flex-1">
           Property Rating
           <select
             {...register("propertyRating", {
               required: "Property rating is required",
             })}
-            className="border rounded w-full p-1 text-gray-700 font-normal"
+            className="border border-blue-300 text-gray-200 rounded w-full p-1  font-normal bg-[#202225]"
           >
             <option value="" className="text-sm font-bold">
               Select propery rating
@@ -116,16 +116,16 @@ const BasicDetails = () => {
         )}
         </label> */}
       </div>
-      <div className="flex flex-row gap-5">
-        <label className="text-gray-700 text-sm font-bold flex-1">
+      <div className="flex flex-col sm:flex-row gap-5">
+        <label className="text-gray-200 text-sm font-bold flex-1">
           Adult Count <i className="font-normal">(minimum 1)</i>
           <select
             {...register("adultCount", {
               required: "Adult required",
             })}
-            className="border rounded w-full p-1 text-gray-700 font-normal"
+            className="border border-blue-300 text-gray-200 rounded w-full p-1  font-normal bg-[#202225]"
           >
-            <option value="" className="text-sm font-bold">
+            <option value="" className="text-sm  text-gray-200font-bold">
               Select adult count
             </option>
             {[1, 2, 3].map((num) => (
@@ -138,13 +138,13 @@ const BasicDetails = () => {
             </span>
           )}
         </label>
-        <label className="text-gray-700 text-sm font-bold flex-1">
+        <label className="text-gray-200 text-sm font-bold flex-1">
           Child Count
           <select
             {...register("childCount", {
               required: "Child count is required",
             })}
-            className="border rounded w-full p-1 text-gray-700 font-normal"
+            className="border border-blue-300 text-gray-200 rounded w-full p-1  font-normal bg-[#202225]"
           >
             <option value="" className="text-sm font-bold">
               Select child count

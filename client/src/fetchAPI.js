@@ -67,6 +67,19 @@ export const logout = async () => {
   return responseBody;
 };
 
+// Get user details API
+export const getUserDetails = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/users/my-details`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error fetching user details");
+  }
+
+  return response.json();
+};
+
 // Create a new listing API
 export const addListing = async (listingData) => {
   const response = await fetch(`${API_BASE_URL}/api/myListings`, {
@@ -188,3 +201,20 @@ export const getListingDetailsById = async (listingId) => {
   }
   return await response.json();
 };
+
+// Create payment intent
+export const createPaymentIntent = async ({ listingId, numNights }) => {
+  const response = await fetch(`${API_BASE_URL}/api/listings/${listingId}/bookings/create-payment-intent`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ numNights }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Error creating payment intent");
+  }
+  return await response.json();
+}

@@ -10,6 +10,7 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from "url"; // new in Node.js 13.2.0
 import { v2 as cloudinary } from "cloudinary";
+import helmet from "helmet";
 
 // Cloudinary configuration
 cloudinary.config({
@@ -36,6 +37,14 @@ mongoose
 
 // Express configuration, cors configuration, and cookie-parser
 const app = express();
+app.use((req, res, next) => {
+  res.setHeader(
+    'Content-Security-Policy',
+    "script-src 'self' https://js.stripe.com https://r.stripe.com"
+  );
+  next();
+});
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
@@ -45,7 +54,6 @@ app.use(
     credentials: true,
   })
 );
-
 // Serve static files
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

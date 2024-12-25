@@ -21,7 +21,7 @@ createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <AppContextProvider>
         <SearchContextProvider>
-          <App />
+            <App />
         </SearchContextProvider>
       </AppContextProvider>
     </QueryClientProvider>

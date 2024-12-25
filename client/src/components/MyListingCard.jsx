@@ -1,20 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import * as fetchAPI from "../fetchAPI";
 
-const SearchResultCard = ({ listing }) => {
+const MyListingCard = ({ listing }) => {
   // console.log(listing);
   // const searchCardStyle = "grid grid-cols-1 border border-slate-300 rounded-lg p-2 gap-4";
-  const searchCardStyle = "grid grid-cols-1 rounded-xl bg-[#2F3137]";
+  const black_btn =
+    "p-2 px-4 h-fit rounded-md bg-[#5870dd] hover:bg-[#3E56C4] text-slate-200 flex flex-row place-items-center gap-2 text-sm";
+  const red_btn =
+    "p-2 px-4 h-fit rounded-md bg-[#F24667] text-white hover:bg-[#df2f52] flex flex-row place-items-center gap-2 text-sm";
+
+  const searchCardStyle = "grid grid-cols-1 rounded-xl bg-[#13181C] p-2 gap-4";
   return (
     <div className={searchCardStyle}>
       <div className="w-full h-[225px]">
         <img
           src={listing.images[0]}
           alt={listing.title}
-          className="rounded-t-md w-full h-full object-cover"
+          className="rounded-md w-full h-full object-cover"
         />
       </div>
-      <div className="flex flex-col w-full p-2">
+      <div className="flex flex-col w-full">
         <div
           id="quick-info"
           className="flex flex-row justify-between items-center"
@@ -39,8 +45,8 @@ const SearchResultCard = ({ listing }) => {
         <div className="flex-1 flex-col justify-between">
           <div id="facilities" className="">
             {/* {listing.facilities.map((item, index) => (
-              <span key={index}> • {item}</span>
-            ))} */}
+                <span key={index}> • {item}</span>
+              ))} */}
             {listing.facilities.slice(0, 3).map((item, index) => (
               <span
                 key={index}
@@ -55,13 +61,13 @@ const SearchResultCard = ({ listing }) => {
               </span>
             )}
             {/* <HStack mt="4" wrap="wrap">
-              {listing.facilities.slice(0, 3).map((item, index) => (
-                <Badge key={index}>{item}</Badge>
-              ))}
-              {listing.facilities.length > 3 && (
-                <Badge>+{listing.facilities.length - 3} more</Badge>
-              )}
-            </HStack> */}
+                {listing.facilities.slice(0, 3).map((item, index) => (
+                  <Badge key={index}>{item}</Badge>
+                ))}
+                {listing.facilities.length > 3 && (
+                  <Badge>+{listing.facilities.length - 3} more</Badge>
+                )}
+              </HStack> */}
           </div>
           {/* <div className="text-end">INR {listing.price} per night</div> */}
         </div>
@@ -69,21 +75,30 @@ const SearchResultCard = ({ listing }) => {
           id="details-btn"
           className="flex flex-col gap-2 justify-end items-end"
         >
-          <span className="text-lg text-end text-slate-200">
+          <span className="text-lg text-slate-200 text-end">
             INR {listing.price} per night
           </span>
-          <Link
-            to={`/listing/details/${listing._id}`}
-            // className="border border-black p-1 px-3 rounded-md items-center w-fit hover:bg-black hover:text-white"
-            className="p-2 px-4 h-fit rounded-md bg-[#5870dd] hover:bg-[#3E56C4] text-slate-200 flex flex-row place-items-center gap-2 text-sm"
-          >
-            See availability{" "}
-            <i className="fa-solid fa-chevron-right text-xs ml-1"></i>
-          </Link>
+          <span className="flex justify-end gap-3">
+            <Link
+              to={`/listings/edit/${listing._id}`}
+              // className="bg-black text-white p-2 rounded font-bold text-sm gap-2 flex flex-row place-items-center"
+              className={black_btn}
+            >
+              <i className="fa-regular fa-pen-to-square"></i>
+              <p>Edit</p>
+            </Link>
+            <button
+              onClick={() => fetchAPI.deleteListingById(listing._id)}
+              className={red_btn}
+            >
+              <i className="fa-solid fa-trash"></i>
+              <p>Delete</p>
+            </button>
+          </span>
         </div>
       </div>
     </div>
   );
 };
 
-export default SearchResultCard;
+export default MyListingCard;

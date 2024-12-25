@@ -1,10 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Toast from "../components/Toast";
 import { useQuery } from "react-query";
 import * as fetchAPI from "../fetchAPI";
+import { loadStripe } from "@stripe/stripe-js";
+
+const STRIPE_PUBLISHABLE_KEY =
+  import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || "";
 
 // 1. Create the Context
 const AppContext = React.createContext(undefined);
+
+// initializes Stripe in client and returns a Promise that resolves to a Stripe object when Stripe.js is successfully loaded
+const stripePromise = STRIPE_PUBLISHABLE_KEY
+  ? loadStripe(STRIPE_PUBLISHABLE_KEY)
+  : undefined;
 
 // 2. Create the Provider Component that wraps the entire app to manage state
 export const AppContextProvider = ({ children }) => {
@@ -25,12 +34,12 @@ export const AppContextProvider = ({ children }) => {
           setToast(toastMessage);
         },
         isLoggedIn: !isError, // if no error, we are logged in
-        // stripePromise,
+        stripePromise
       }}
     >
       {/* 2.4 Return provider component wrapping it's children */}
       {toast && ( // if toast is not undefined, render the Toast component
-        <Toast 
+        <Toast
           message={toast.message}
           type={toast.type}
           onClose={() => setToast(undefined)}

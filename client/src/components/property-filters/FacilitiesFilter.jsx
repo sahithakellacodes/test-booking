@@ -3,13 +3,13 @@ import { hotelFacilities } from "../../config/hotelOptions";
 
 const FacilitiesFilter = ({ selectedFacilities, onChange }) => {
   return (
-    <div className="border-b border-slate-300 pb-5">
+    <div className="border-b border-slate-300 text-slate-200 pb-5">
       <h4 className="text-md font-semibold mb-2">Facilities</h4>
       {hotelFacilities.map((facility) => (
         <label className="flex items-center gap-2" key={facility.label}>
           <input
             type="checkbox"
-            className="rounded accent-black"
+            className="rounded accent-[#5870dd]"
             value={facility.label}
             checked={selectedFacilities.includes(facility.label)}
             onChange={onChange}

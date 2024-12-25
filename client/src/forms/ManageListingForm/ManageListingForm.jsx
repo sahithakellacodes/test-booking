@@ -60,7 +60,7 @@ const ManageListingForm = ({ onSave, isLoading, listingDetails }) => {
   // Return the form
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="p-4 bg-[#2F3137] rounded-md">
         <BasicDetails />
         <br />
         <br />
@@ -77,7 +77,7 @@ const ManageListingForm = ({ onSave, isLoading, listingDetails }) => {
             // Disable the button if the form is submitting
             disabled={isLoading}
             type="submit"
-            className="bg-black text-white p-2 px-4 rounded-full disabled:opacity-50"
+            className="bg-gray-200 text-black p-2 px-4 rounded-full disabled:opacity-50"
           >
             {isLoading ? "Saving..." : "Save"}
           </button>

@@ -3,6 +3,7 @@ import User from "../models/user.js";
 import { check, validationResult } from "express-validator";
 import "dotenv/config";
 import createToken from "../scripts/createToken.js";
+import verifyToken from "../middleware/auth.js";
 
 // Create a new router
 const router = express.Router({ mergeParams: true });
@@ -42,9 +43,7 @@ router.post(
       await user.save();
 
       if (!process.env.JWT_SECRET_KEY) {
-        return res
-          .status(500)
-          .json({ message: "Something went wrong" }); // JWT secret key is not defined
+        return res.status(500).json({ message: "Something went wrong" }); // JWT secret key is not defined
       }
       // const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY, {
       //   expiresIn: "1d",
@@ -61,7 +60,6 @@ router.post(
       });
 
       return res.status(200).send({ message: "user registered successfully" });
-
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Something went wrong" });
@@ -69,6 +67,22 @@ router.post(
   }
 );
 
+// Get the currently logged in user
+router.get("/my-details", verifyToken, async (req, res) => {
+  const userId = req.userId;
 
+  try {
+    // Exclude the password field from the response
+    // This is safe since we are doing this on the server side
+    const user = await User.findById(userId).select("-password");
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (e) {
+    console.log("Error in getting user details: ", e);
+    res.status(500).send({ message: "Something went wrong" });
+  }
+});
 
 export default router;

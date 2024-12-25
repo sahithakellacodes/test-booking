@@ -17,8 +17,7 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const searchParams = new URLSearchParams(location.search);
-  const from = searchParams.get("from") || "/";
+  const from = location.state?.from || "/";
 
   // Use useMutation hook to handle data modification (login a user)
   const mutation = useMutation(fetchAPI.login, {
@@ -39,13 +38,13 @@ const Login = () => {
   // Return the form
   return (
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
-      <h2 className="text-3xl font-bold">Login</h2>
-      <label className="text-gray-700 text-sm font-bold flex-1">
+      <h2 className="text-3xl text-gray-200 font-bold">Login</h2>
+      <label className="text-gray-200 text-sm font-bold flex-1">
         Email
         <input
           type="email"
-          autoComplete="email" 
-          className="border rounded w-full py-1 px-2 font-normal"
+          autoComplete="email"
+          className="border rounded w-full py-1 px-2 font-normal text-gray-200 bg-[#202225]"
           {...register("email", { required: "Email is required" })}
         ></input>
         {errors.email && (
@@ -54,12 +53,12 @@ const Login = () => {
           </span>
         )}
       </label>
-      <label className="text-gray-700 text-sm font-bold flex-1">
+      <label className="text-gray-200 text-sm font-bold flex-1">
         Password
         <input
           type="password"
-          className="border rounded w-full py-1 px-2 font-normal"
-          autoComplete="current-password" 
+          className="border rounded w-full py-1 px-2 font-normal text-gray-200 bg-[#202225]"
+          autoComplete="current-password"
           {...register("password", {
             required: "Password is required",
             minLength: {
@@ -75,10 +74,17 @@ const Login = () => {
         )}
       </label>
       <span className="flex justify-between">
-        <p className="font-light text-xs">Don't have an account? <a href="/user/register"><u>register</u></a> instead</p>
+        <p className="font-light text-xs text-gray-200">
+          Don't have an account?{" "}
+          <a href="/user/register">
+            <u>register</u>
+          </a>{" "}
+          instead
+        </p>
         <button
           type="submit"
-          className="bg-black text-white p-2 px-4 rounded-full"
+          // className="bg-black text-white p-2 px-4 rounded-full"
+          className="bg-gray-200 text-black p-2 px-4 rounded-full disabled:opacity-50"
         >
           Login
         </button>
