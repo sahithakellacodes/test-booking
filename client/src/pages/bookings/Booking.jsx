@@ -29,20 +29,37 @@ const Booking = () => {
   );
 
   // Create a payment intent
+  // const paymentIntentData = useQuery(
+  //   console.log("Use query called"),
+  //   "createPaymentIntent",
+  //   async () => {
+  //     console.log("payment intent logs called"); // Log the response to inspect its structure
+  //     const response = await fetchAPI.createPaymentIntent(
+  //       listingId,
+  //       lengthOfStay.toString()
+  //     );
+  //     console.log("payment intent logs: "); // Log the response to inspect its structure
+  //   },
+  //   {
+  //     enabled: !!listingId && !!lengthOfStay && lengthOfStay > 0,
+  //   }
+  // );
+
+  console.log("meta", { listingId, lengthOfStay });
+
   const paymentIntentData = useQuery(
     "createPaymentIntent",
-    async () => {
-      const response = await fetchAPI.createPaymentIntent(
+    () =>
+      fetchAPI.createPaymentIntent({
         listingId,
-        lengthOfStay.toString()
-      );
-      console.log("payment intent logs: ", response); // Log the response to inspect its structure
-      return response; // Ensure to return the response
-    },
+        numNights: lengthOfStay.toString(),
+      }),
     {
       enabled: !!listingId && !!lengthOfStay && lengthOfStay > 0,
     }
   );
+
+  // console.log("Payment intent data: ", paymentIntentData);
 
   // get listing details by id
   const listingDetails = useQuery(
@@ -54,11 +71,11 @@ const Booking = () => {
   );
 
   if (listingDetails.isLoading || userDetails.isLoading) {
-    return <div>Loading...</div>;
+    return <div className="text-slate-200">Loading...</div>;
   }
 
-  if (paymentIntentData.isLoading) return <div>Loading...</div>;
-
+  if (paymentIntentData.isLoading) return <div className="text-slate-200">Loading...</div>;
+  
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-3">
       <BookingDetails search={search} listingDetails={listingDetails.data} />
@@ -73,7 +90,7 @@ const Booking = () => {
           />
         </Elements>
       )}
-    </div>
+    </div>    
   );
 };
 

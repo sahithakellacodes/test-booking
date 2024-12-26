@@ -204,6 +204,7 @@ export const getListingDetailsById = async (listingId) => {
 
 // Create payment intent
 export const createPaymentIntent = async ({ listingId, numNights }) => {
+  console.log("FETCH API CALLED");
   const response = await fetch(`${API_BASE_URL}/api/listings/${listingId}/bookings/create-payment-intent`, {
     method: "POST",
     credentials: "include",
@@ -215,6 +216,23 @@ export const createPaymentIntent = async ({ listingId, numNights }) => {
 
   if (!response.ok) {
     throw new Error("Error creating payment intent");
+  }
+  return await response.json();
+}
+
+export const createBooking = async ({listingId, bookingData}) => {
+  console.log("Booking Data:  ", bookingData);
+  const response = await fetch(`${API_BASE_URL}/api/listings/${listingId}/bookings`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bookingData),
+  });
+
+  if (!response.ok) {
+    throw new Error("Error creating booking");
   }
   return await response.json();
 }

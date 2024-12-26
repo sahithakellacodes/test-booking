@@ -5,7 +5,7 @@ const BookingDetails = ({search, listingDetails}) => {
     const lengthOfStay = getDurationBetweenDates(search.checkIn, search.checkOut);
 
   return (
-    <div id="booking-details" className="border-2 rounded-lg p-4 flex flex-col">
+    <div id="booking-details" className="border-2 rounded-lg p-4 flex flex-col text-slate-200">
       <h2 className="text-lg font-semibold mb-4">Your Booking Details</h2>
       <hr />
       <span className="font-thin mt-4">Location:</span>

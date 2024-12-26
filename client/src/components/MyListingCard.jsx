@@ -60,14 +60,6 @@ const MyListingCard = ({ listing }) => {
                 +{listing.facilities.length - 3} more
               </span>
             )}
-            {/* <HStack mt="4" wrap="wrap">
-                {listing.facilities.slice(0, 3).map((item, index) => (
-                  <Badge key={index}>{item}</Badge>
-                ))}
-                {listing.facilities.length > 3 && (
-                  <Badge>+{listing.facilities.length - 3} more</Badge>
-                )}
-              </HStack> */}
           </div>
           {/* <div className="text-end">INR {listing.price} per night</div> */}
         </div>

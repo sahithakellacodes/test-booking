@@ -97,7 +97,7 @@ router.post("/:listingId/bookings/create-payment-intent", verifyToken, async (re
     }
 
     const pricePerNight = listing.price;
-    const totalPrice = pricePerNight * 100 * numNights;
+    const totalPrice = pricePerNight * numNights;
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: totalPrice,
@@ -176,6 +176,8 @@ router.post("/:listingId/bookings", verifyToken, async (req, res) => {
       childCount: req.body.childCount,
       totalPrice: paymentIntent.amount,
     }
+
+    console.log("New booking: ", newBooking);
 
     // Update the listing with the new booking and save it
     const listing = await Listing.findOneAndUpdate({ _id: req.params.listingId }, { $push: { bookings: newBooking } });
