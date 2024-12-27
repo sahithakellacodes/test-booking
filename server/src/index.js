@@ -43,7 +43,7 @@ app.use(
     directives: {
       scriptSrc: ["'self'", "https://js.stripe.com"],
       frameSrc: ["'self'", "https://js.stripe.com", "https://hooks.stripe.com"],
-      imageSrc: ["'self'", "https://res.cloudinary.com"], // CSP for images from cloudinary
+      imgSrc: ["'self'", "data:", "https://res.cloudinary.com"], // CSP for images from cloudinary
     },
   })
 );
