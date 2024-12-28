@@ -1,5 +1,6 @@
 import express from "express";
 import Listing from "../models/listing.js";
+import User from "../models/user.js";
 // import constructSearchQuery from "../scripts/constructSearchQuery.js";
 import { pagination_page_size } from "../config.js";
 import { param, validationResult } from "express-validator";
@@ -97,7 +98,7 @@ router.post("/:listingId/bookings/create-payment-intent", verifyToken, async (re
     }
 
     const pricePerNight = listing.price;
-    const totalPrice = pricePerNight * numNights;
+    const totalPrice = pricePerNight * 100 * numNights;
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: totalPrice,
@@ -133,6 +134,7 @@ router.post("/:listingId/bookings/create-payment-intent", verifyToken, async (re
 
 // Create property booking
 router.post("/:listingId/bookings", verifyToken, async (req, res) => {
+  console.log("REQUEST: ", req.body, "!!!REQUEST ENDS HERE!!!!!");
   try {
     // Check if payment intent exists
     const paymentIntentId = req.body.paymentIntentId;
@@ -166,26 +168,31 @@ router.post("/:listingId/bookings", verifyToken, async (req, res) => {
 
     // Create the booking
     const newBooking = {
-      userId: req.userId,
-      username: req.username,
-      email: req.email,
-      listingId: req.params.listingId,
+      userId: String(req.body.userId),
+      username: String(req.body.username),
+      email: String(req.body.email),
+      listingId: String(req.params.listingId),
       checkIn: new Date(req.body.checkIn),
       checkOut: new Date(req.body.checkOut),
-      adultCount: req.body.adultCount,
-      childCount: req.body.childCount,
-      totalPrice: paymentIntent.amount,
+      adultCount: Number(req.body.adultCount),
+      childCount: Number(req.body.childCount),
+      totalPrice: Number(req.body.totalPrice),
     }
-
-    console.log("New booking: ", newBooking);
 
     // Update the listing with the new booking and save it
     const listing = await Listing.findOneAndUpdate({ _id: req.params.listingId }, { $push: { bookings: newBooking } });
-    // const listing = await Listing.findOneAndUpdate({ _id: req.params.listingId }, { $push: { bookings: newBooking } }, { new: true });
+    const user = await User.findOneAndUpdate({ _id: req.body.userId }, { $push: { bookings: newBooking } });
 
     if (!listing) {
       return res.status(404).json({
         message: "Listing not found"
+      });
+    }
+
+    if (!user) {
+      console.log("User not found");
+      return res.status(404).json({
+        message: "Something went wrong!"
       });
     }
 

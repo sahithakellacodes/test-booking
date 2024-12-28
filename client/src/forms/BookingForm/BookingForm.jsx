@@ -15,11 +15,10 @@ const BookingForm = ({ userDetails, paymentIntentData }) => {
   const search = useSearchContext();
   const { listingId } = useParams();
   const { showToast } = useAppContext();
-
   const { mutate: bookRoom, isLoading } = useMutation(
-    (formData) => {
-      const { bookingData } = formData;
-      fetchAPI.createBooking(listingId, bookingData);
+    async (formData) => {
+      const bookingData = { ...formData };
+      return await fetchAPI.createBooking({ listingId, bookingData });
     },
     {
       onSuccess: () => {
@@ -39,10 +38,9 @@ const BookingForm = ({ userDetails, paymentIntentData }) => {
     }
   );
 
-  console.log("userdetails", userDetails.data);
-
   const { handleSubmit, register } = useForm({
     defaultValues: {
+      userId: userDetails.data._id,
       username: userDetails.data.username,
       email: userDetails.data.email,
       adultCount: search.adultCount,
@@ -54,8 +52,6 @@ const BookingForm = ({ userDetails, paymentIntentData }) => {
       paymentIntentId: paymentIntentData.data.paymentIntentId,
     },
   });
-
-  console.log("Payment intent data: ", paymentIntentData.data);
 
   const onSubmit = async (formData) => {
     if (!stripe || !elements) {
@@ -72,8 +68,6 @@ const BookingForm = ({ userDetails, paymentIntentData }) => {
     );
 
     if (result.paymentIntent?.status === "succeeded") {
-      console.log("Payment succeeded");
-      console.log("Form data: ", formData);
       // book the room
       bookRoom({
         ...formData,
@@ -116,7 +110,8 @@ const BookingForm = ({ userDetails, paymentIntentData }) => {
       </span>
       <div className="flex flex-col mb-4 p-4 bg-blue-100 rounded-lg">
         <span className="font-semibold">
-          Total Cost: INR {paymentIntentData.data.totalPrice.toFixed(2) || 0}
+          Total Cost: INR{" "}
+          {(paymentIntentData.data.totalPrice / 100).toFixed(2) || 0}
           {/* Total Cost: €327.42 */}
         </span>
         <span className="font-light text-sm">inclusive of taxes</span>

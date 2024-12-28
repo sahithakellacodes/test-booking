@@ -221,7 +221,6 @@ export const createPaymentIntent = async ({ listingId, numNights }) => {
 }
 
 export const createBooking = async ({listingId, bookingData}) => {
-  console.log("Booking Data:  ", bookingData);
   const response = await fetch(`${API_BASE_URL}/api/listings/${listingId}/bookings`, {
     method: "POST",
     credentials: "include",
