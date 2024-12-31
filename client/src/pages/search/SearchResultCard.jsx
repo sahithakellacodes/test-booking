@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 const SearchResultCard = ({ listing }) => {
   // console.log(listing);
   // const searchCardStyle = "grid grid-cols-1 border border-slate-300 rounded-lg p-2 gap-4";
-  const searchCardStyle = "grid grid-cols-1 rounded-xl bg-[#2F3137]";
+  const searchCardStyle = "grid grid-cols-1 rounded-xl bg-[#2F3137] shadow-lg";
   return (
     <div className={searchCardStyle}>
       <div className="w-full h-[225px]">
         <img
           src={listing.images[0]}
           alt={listing.title}
-          className="rounded-t-md w-full h-full object-cover"
+          className="rounded-t-xl w-full h-full object-cover"
         />
       </div>
       <div className="flex flex-col w-full p-2">
@@ -69,8 +69,8 @@ const SearchResultCard = ({ listing }) => {
           id="details-btn"
           className="flex flex-col gap-2 justify-end items-end"
         >
-          <span className="text-lg text-end text-slate-200">
-            INR {listing.price} per night
+          <span className="text-md text-end text-slate-200">
+            INR <b className="font-semibold">{listing.price}</b>
           </span>
           <Link
             to={`/listing/details/${listing._id}`}

@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./layouts/Layout";
+import Home from "./pages/home/Home";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import AddListing from "./pages/listings/AddListing";
@@ -11,6 +12,7 @@ import { useAppContext } from "./contexts/AppContext";
 import SearchBar from "./components/SearchBar";
 import Search from "./pages/search/Search";
 import Booking from "./pages/bookings/Booking";
+import MyBookings from "./pages/bookings/MyBookings";
 import PageNotFound from "./pages/pagenotfound/PageNotFound";
 
 const App = () => {
@@ -33,7 +35,7 @@ const App = () => {
           element={
             <Layout>
               <SearchBar />
-              <p>Home Page</p>
+              <Home />
             </Layout>
           }
         />
@@ -102,6 +104,14 @@ const App = () => {
               element={
                 <Layout>
                   <Booking />
+                </Layout>
+              }
+            />
+            <Route
+              path="/bookings/viewAll"
+              element={
+                <Layout>
+                  <MyBookings />
                 </Layout>
               }
             />

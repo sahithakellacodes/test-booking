@@ -220,6 +220,7 @@ export const createPaymentIntent = async ({ listingId, numNights }) => {
   return await response.json();
 }
 
+// Create booking
 export const createBooking = async ({listingId, bookingData}) => {
   const response = await fetch(`${API_BASE_URL}/api/listings/${listingId}/bookings`, {
     method: "POST",
@@ -235,3 +236,13 @@ export const createBooking = async ({listingId, bookingData}) => {
   }
   return await response.json();
 }
+
+// Fetch recently added listings
+export const fetchRecentListings = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/listings/recently-added`);
+
+  if (!response.ok) {
+    throw new Error("Error fetching recently added listings");
+  }
+  return response.json();
+};

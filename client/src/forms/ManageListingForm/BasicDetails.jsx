@@ -16,7 +16,7 @@ const BasicDetails = () => {
       <label className="text-gray-200 text-sm font-bold flex-1">
         Property Name
         <input
-          className="border border-blue-300 text-gray-200 rounded w-full py-1 px-2 font-normal bg-[#202225]"
+          className="border border-slate-100 text-gray-200 rounded w-full py-1 px-2 font-normal bg-[#202225] focus:border-blue-300 focus:outline-none"
           {...register("name", { required: "Property name is required" })}
         ></input>
         {errors.name && (
@@ -29,7 +29,7 @@ const BasicDetails = () => {
         <label className="text-gray-200 text-sm font-bold flex-1">
           City
           <input
-            className="border border-blue-300 text-gray-200 rounded w-full py-1 px-2 font-normal bg-[#202225]"
+            className="border border-slate-100 text-gray-200 rounded w-full py-1 px-2 font-normal bg-[#202225] focus:border-blue-300 focus:outline-none"
             {...register("city", { required: "City is required" })}
           ></input>
           {errors.city && (
@@ -41,7 +41,7 @@ const BasicDetails = () => {
         <label className="text-gray-200 text-sm font-bold flex-1">
           Country
           <input
-            className="border border-blue-300 text-gray-200 rounded w-full py-1 px-2 font-normal bg-[#202225]"
+            className="border border-slate-100 text-gray-200 rounded w-full py-1 px-2 font-normal bg-[#202225] focus:border-blue-300 focus:outline-none"
             {...register("country", { required: "Country is required" })}
           ></input>
           {errors.country && (
@@ -55,7 +55,7 @@ const BasicDetails = () => {
         Property Description
         <textarea
           rows={5}
-          className="border border-blue-300 text-gray-200 rounded w-full py-1 px-2 font-normal bg-[#202225]"
+          className="border border-slate-100 text-gray-200 rounded w-full py-1 px-2 font-normal bg-[#202225] focus:border-blue-300 focus:outline-none"
           {...register("description", {
             required: "Property description is required",
           })}
@@ -70,7 +70,7 @@ const BasicDetails = () => {
         Property Price <i className="font-normal">(per night)</i>
         <input
           type="number"
-          className="border border-blue-300 text-gray-200 rounded w-full py-1 px-2 font-normal bg-[#202225]"
+          className="border border-slate-100 text-gray-200 rounded w-full py-1 px-2 font-normal bg-[#202225] focus:border-blue-300 focus:outline-none"
           min={1}
           {...register("price", { required: "Property price is required" })}
         ></input>
@@ -87,7 +87,7 @@ const BasicDetails = () => {
             {...register("propertyRating", {
               required: "Property rating is required",
             })}
-            className="border border-blue-300 text-gray-200 rounded w-full p-1  font-normal bg-[#202225]"
+            className="border border-slate-100 text-gray-200 rounded w-full p-1  font-normal bg-[#202225] focus:border-blue-300 focus:outline-none"
           >
             <option value="" className="text-sm font-bold">
               Select propery rating
@@ -123,7 +123,7 @@ const BasicDetails = () => {
             {...register("adultCount", {
               required: "Adult required",
             })}
-            className="border border-blue-300 text-gray-200 rounded w-full p-1  font-normal bg-[#202225]"
+            className="border border-slate-100 text-gray-200 rounded w-full p-1  font-normal bg-[#202225] focus:border-blue-300 focus:outline-none"
           >
             <option value="" className="text-sm  text-gray-200font-bold">
               Select adult count
@@ -144,7 +144,7 @@ const BasicDetails = () => {
             {...register("childCount", {
               required: "Child count is required",
             })}
-            className="border border-blue-300 text-gray-200 rounded w-full p-1  font-normal bg-[#202225]"
+            className="border border-slate-100 text-gray-200 rounded w-full p-1  font-normal bg-[#202225] focus:border-blue-300 focus:outline-none"
           >
             <option value="" className="text-sm font-bold">
               Select child count

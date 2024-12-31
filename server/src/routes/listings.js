@@ -12,6 +12,17 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const router = express.Router({ mergeParams: true });
 router.use(express.json());
 
+// Get recent listings
+router.get("/recently-added", async (req, res) => {
+  try {
+    const listings = await Listing.find().sort("-lastUpdated").limit(4);
+    res.status(200).json(listings);
+  } catch (err) {
+    console.log("Get recent listings error: ", err);
+    res.status(500).json({ message: "Something went wrong!" });
+  }
+});
+
 // Search listings
 router.get("/search", async (req, res) => {
   try {

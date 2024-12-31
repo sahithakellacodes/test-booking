@@ -10,7 +10,7 @@ const MyListingCard = ({ listing }) => {
   const red_btn =
     "p-2 px-4 h-fit rounded-md bg-[#F24667] text-white hover:bg-[#df2f52] flex flex-row place-items-center gap-2 text-sm";
 
-  const searchCardStyle = "grid grid-cols-1 rounded-xl bg-[#13181C] p-2 gap-4";
+  const searchCardStyle = "grid grid-cols-1 rounded-xl bg-[#2F3137] p-2 gap-4 shadow-lg";
   return (
     <div className={searchCardStyle}>
       <div className="w-full h-[225px]">

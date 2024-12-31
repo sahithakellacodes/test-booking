@@ -1,1 +1,1 @@
-export const pagination_page_size = 15;
+export const pagination_page_size = 5;
