@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       {location.pathname === "/" && <Banner />}
-      <div className="py-10 px-8 flex-1">{children}</div>
+      <div className="py-10 px-3 md:px-8 flex-1">{children}</div>
       <Footer />
     </div>
   );

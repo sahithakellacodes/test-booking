@@ -35,72 +35,79 @@ const SearchBar = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex justify-center bg-[#2F3137] font-semibold text-white items-center text-sm overflow-hidden border-2 border-[#31708e] rounded-lg"
+      className="bg-[#5870DD] text-slate-200 p-[6px] rounded-lg"
     >
-      <div className="flex flex-row justify-between items-center gap-4 p-4">
-        <label className="flex flex-col gap-1 w-96">
-          Search your destination
+      <div className="flex flex-col items-center gap-[6px]">
+        {/* <p className="w-full text-left text-sm">Destination</p> */}
+        <label className="flex items-center gap-2 w-full bg-[#212328] px-3 py-2 rounded-lg">
+          <i class="fa-solid fa-magnifying-glass"></i>
           <input
             type="text"
-            className="outline-none font-normal text-black bg-[#FFFDF2] p-2 rounded-md"
-            placeholder="Enter destination or property name"
+            className="bg-[#212328] font-semibold rounded-sm w-full focus:outline-none py-2"
+            placeholder="Enter a destination or property"
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
           />
         </label>
-        <label className="flex flex-row gap-6">
-          <label className="flex flex-col gap-2 items-start w-40">
-            Check-inㅤ
-            <DatePicker
-              selected={checkIn}
-              onChange={(date) => setCheckIn(date)}
-              selectsStart
-              startDate={checkIn}
-              endDate={checkOut}
-              minDate={setMinDate}
-              maxDate={setMaxDate}
-              className="focus:outline-none outline-none font-normal text-black bg-[#FFFDF2] p-2 rounded-md"
-            />
-          </label>
-          <label className="flex flex-col gap-2 items-start w-40">
-            Check-out
-            <DatePicker
-              selected={checkOut}
-              onChange={(date) => setCheckOut(date)}
-              selectsStart
-              startDate={checkIn}
-              endDate={checkOut}
-              minDate={setMinDate}
-              maxDate={setMaxDate}
-              className="focus:outline-none outline-none font-normal text-black bg-[#FFFDF2] p-2 rounded-md"
-            />
-          </label>
-        </label>
-        <label className="flex flex-row gap-6">
-          <label className="flex flex-col gap-2 items-start">
-            Adults:
-            <input
-              type="number"
-              className="outline-none mx-2 font-normal text-black bg-[#FFFDF2] p-2 rounded-md"
-              min={1}
-              max={20}
-              value={adultCount}
-              onChange={(e) => setAdultCount(parseInt(e.target.value))}
-            />
-          </label>
-          <label className="flex flex-col gap-2 items-start">
-            Children:
-            <input
-              type="number"
-              className="outline-none mx-2 font-normal text-black bg-[#FFFDF2] p-2 rounded-md"
-              min={0}
-              max={20}
-              value={childCount}
-              onChange={(e) => setChildCount(parseInt(e.target.value))}
-            />
-          </label>
-        </label>
-        <button className="border bg-[#FFFDF2] text-black border-black p-2 rounded-md hover:bg-[#f3efda]">
+        <div id="dates-and-guests" className="w-full flex flex-col gap-[6px]">
+          <div className="w-full">
+            <label id="dates" className="flex md:flex-col items-center gap-[6px] w-full bg-[#212328] md:bg-[#5870DD] rounded-lg">
+              <label className="flex flex-col w-full text-sm bg-[#212328] p-1 px-2 rounded-lg">
+                Check-in date
+                <DatePicker
+                  selected={checkIn}
+                  onChange={(date) => setCheckIn(date)}
+                  selectsStart
+                  startDate={checkIn}
+                  endDate={checkOut}
+                  minDate={setMinDate}
+                  maxDate={setMaxDate}
+                  className="bg-[#212328] rounded-sm w-full mt-1 font-semibold focus:outline-none text-base"
+                />
+              </label>
+              <label className="flex flex-col w-full text-sm bg-[#212328] p-1 px-2 rounded-lg">
+              Check-out date
+                <DatePicker
+                  selected={checkOut}
+                  onChange={(date) => setCheckOut(date)}
+                  selectsStart
+                  startDate={checkIn}
+                  endDate={checkOut}
+                  minDate={setMinDate}
+                  maxDate={setMaxDate}
+                  className="bg-[#212328] rounded-sm w-full mt-1 font-semibold focus:outline-none text-base"
+                />
+              </label>
+            </label>
+          </div>
+          <div className="w-full">
+            <label id="guests" className="flex bg-[#212328] items-center gap-2 p-1 px-2 w-full rounded-lg">
+              <label className="flex flex-col items-start text-left w-full text-sm">
+                Adults:
+                <input
+                  type="number"
+                  className="bg-[#212328] w-full font-semibold py-1 rounded-lg text-base"
+                  min={1}
+                  max={20}
+                  value={adultCount}
+                  onChange={(e) => setAdultCount(parseInt(e.target.value))}
+                />
+              </label>
+              <label className="flex flex-col items-start text-left w-full text-sm">
+                Children:
+                <input
+                  type="number"
+                  className="bg-[#212328] w-full font-semibold py-1 rounded-lg text-base"
+                  min={0}
+                  max={20}
+                  value={childCount}
+                  onChange={(e) => setChildCount(parseInt(e.target.value))}
+                />
+              </label>
+            </label>
+          </div>
+        </div>
+        <button className="bg-[#ffe089] hover:bg-[#ffd970] font-semibold text-black rounded-lg p-2 w-full">
           Search
         </button>
       </div>

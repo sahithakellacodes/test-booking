@@ -20,9 +20,9 @@ const Navbar = () => {
   return (
     <div
       style={{ backgroundColor: navbarBGColor }}
-      className="flex flex-col px-8"
+      className="flex flex-col px-4 md:px-8"
     >
-      <div className="py-3 px-8 flex flex-row justify-between place-items-center">
+      <div className="py-3 px-4 md:px-8 flex flex-row justify-between place-items-center">
         <div className="navbar-start">
           <span className="text-xl font-bold text-white">
             <Link to="/">
@@ -105,6 +105,9 @@ const Navbar = () => {
                   My Listings
                 </Link>
               </span>
+              <button onClick={() => setMenuToggle(false)}>
+                <LogoutButton />
+              </button>
             </>
           ) : (
             <>

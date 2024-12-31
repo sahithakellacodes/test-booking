@@ -13,9 +13,14 @@ export const SearchContextProvider = ({ children }) => {
     () =>
       new Date(sessionStorage.getItem("checkIn") || new Date().toISOString())
   );
+  
+  let currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + 1);
+  let updatedISOString = currentDate.toISOString();
+
   const [checkOut, setCheckOut] = useState(
     () =>
-      new Date(sessionStorage.getItem("checkOut") || new Date().toISOString())
+      new Date(sessionStorage.getItem("checkOut") || updatedISOString)
   );
   const [adultCount, setAdultCount] = useState(
     () => parseInt(sessionStorage.getItem("adultCount")) || 1
