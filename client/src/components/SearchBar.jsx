@@ -40,7 +40,7 @@ const SearchBar = () => {
       <div className="flex flex-col items-center gap-[6px]">
         {/* <p className="w-full text-left text-sm">Destination</p> */}
         <label className="flex items-center gap-2 w-full bg-[#212328] px-3 py-2 rounded-lg">
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <i className="fa-solid fa-magnifying-glass"></i>
           <input
             type="text"
             className="bg-[#212328] font-semibold rounded-sm w-full focus:outline-none py-2"

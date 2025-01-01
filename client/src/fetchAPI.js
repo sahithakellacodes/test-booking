@@ -246,3 +246,17 @@ export const fetchRecentListings = async () => {
   }
   return response.json();
 };
+
+// Get all bookings API
+export const getBookings = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/bookings`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error fetching user bookings");
+  }
+  const responseBody = await response.json();
+  return responseBody;
+};

@@ -28,25 +28,6 @@ const Booking = () => {
     fetchAPI.getUserDetails()
   );
 
-  // Create a payment intent
-  // const paymentIntentData = useQuery(
-  //   console.log("Use query called"),
-  //   "createPaymentIntent",
-  //   async () => {
-  //     console.log("payment intent logs called"); // Log the response to inspect its structure
-  //     const response = await fetchAPI.createPaymentIntent(
-  //       listingId,
-  //       lengthOfStay.toString()
-  //     );
-  //     console.log("payment intent logs: "); // Log the response to inspect its structure
-  //   },
-  //   {
-  //     enabled: !!listingId && !!lengthOfStay && lengthOfStay > 0,
-  //   }
-  // );
-
-  console.log("meta", { listingId, lengthOfStay });
-
   const paymentIntentData = useQuery(
     "createPaymentIntent",
     () =>
@@ -58,8 +39,6 @@ const Booking = () => {
       enabled: !!listingId && !!lengthOfStay && lengthOfStay > 0,
     }
   );
-
-  // console.log("Payment intent data: ", paymentIntentData);
 
   // get listing details by id
   const listingDetails = useQuery(
