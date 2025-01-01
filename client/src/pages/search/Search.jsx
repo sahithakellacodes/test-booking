@@ -20,6 +20,12 @@ const Search = () => {
   const [maxPrice, setMaxPrice] = React.useState();
   const [sortOption, setSortOption] = React.useState("");
 
+  const [filterToggle, setFilterToggle] = React.useState(false);
+
+  const handleToggle = () => {
+    setFilterToggle(!filterToggle);
+  };
+
   // Search Parameters
   const searchParams = {
     destination: search.destination,
@@ -49,11 +55,6 @@ const Search = () => {
     } else {
       setSelectedStars([...selectedStars, starValue]);
     }
-    // setSelectedStars((prev) =>
-    //   e.target.checked
-    //     ? [...prev, parseInt(starValue)]
-    //     : prev.filter((star) => star !== starValue)
-    // );
   };
 
   const handleTypeChange = (e) => {
@@ -64,11 +65,6 @@ const Search = () => {
     } else {
       setSelectedTypes([...selectedTypes, typeValue]);
     }
-    // setSelectedTypes((prev) =>
-    //   e.target.checked
-    //     ? [...prev, typeValue]
-    //     : prev.filter((type) => type !== typeValue)
-    // );
   };
 
   const handleFacilityChange = (e) => {
@@ -82,14 +78,6 @@ const Search = () => {
     }
   };
 
-  // const handlePriceChange = (e) => {
-  //   setMaxPrice(e.target.value);
-  // };
-
-  // if (!isLoading) {
-  //   console.log(data.meta.page);
-  // }
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -102,8 +90,8 @@ const Search = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5 mt-4">
-      <div id="filters" className="rounded-lg h-fit  top-10">
-        <div className="rounded-lg border border-slate-300 p-5 h-fit sticky top-10">
+      <div id="filters" className="rounded-lg h-fit top-10">
+        <div className="rounded-lg border border-slate-300 p-5 h-fit sticky top-10 hidden lg:block">
           <div className="space-y-5">
             <h3 className="text-lg text-slate-200 font-semibold border-b border-slate-300 pb-5">
               Filter by:
@@ -132,7 +120,9 @@ const Search = () => {
       </div>
       {validData.length === 0 ? (
         <div>
-          <span className="text-xl text-slate-200 font-semibold">No results found.</span>
+          <span className="text-xl text-slate-200 font-semibold">
+            No results found.
+          </span>
         </div>
       ) : (
         <div id="body" className="flex flex-col gap-5">
@@ -144,31 +134,85 @@ const Search = () => {
               {data.meta.total} results found{" "}
               {search.destination ? ` in ${search.destination}` : ""}
             </span>
-            <SortingOption
-              sortOption={sortOption}
-              onChange={(event) => setSortOption(event.target.value)}
-            />
+            <span className="hidden lg:block">
+              <SortingOption
+                sortOption={sortOption}
+                onChange={(event) => setSortOption(event.target.value)}
+              />
+            </span>
+            {/* Filter button for mobile */}
+            {filterToggle ? (
+              <button
+                onClick={handleToggle}
+                className="text-slate-200 mr-2 lg:hidden"
+              >
+                <i className="fa-solid fa-xmark"></i>
+              </button>
+            ) : (
+              <button
+                onClick={handleToggle}
+                className="text-slate-200 mr-2 lg:hidden"
+              >
+                <i className="fa-solid fa-filter"></i>
+              </button>
+            )}
           </div>
-          <div
-            id="results"
-            className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 flex-1"
-          >
-            {data
-              ? data.data.map((listing) => (
-                  <div key={listing._id}>
-                    {/* <CardHorizontal key={listing._id} listing={listing}/> */}
-                    <SearchResultCard key={listing._id} listing={listing} />
-                  </div>
-                ))
-              : null}
-          </div>
-          <div>
-            <Pagination
-              page_num={data.meta.page || 1}
-              total_pages={data.meta.pages || 1}
-              onPageChange={(newPage) => setPage(newPage)}
-            />
-          </div>
+          {filterToggle ? (
+            <div id="filters" className="rounded-lg h-fit top-10">
+              <div className="rounded-lg border border-slate-300 p-5 h-fit sticky top-10">
+                <div className="space-y-5">
+                  {/* <SortingOption
+                    sortOption={sortOption}
+                    onChange={(event) => setSortOption(event.target.value)}
+                  /> */}
+                  <h3 className="text-lg text-slate-200 font-semibold border-b border-slate-300 pb-5">
+                    Filter by:
+                  </h3>
+                  <PropertyRatingFilter
+                    selectedStars={selectedStars}
+                    onChange={handleStarChange}
+                  />
+                  <ListingTypesFilter
+                    selectedTypes={selectedTypes}
+                    onChange={handleTypeChange}
+                  />
+                  <FacilitiesFilter
+                    selectedFacilities={selectedFacilities}
+                    onChange={handleFacilityChange}
+                  />
+                  <PriceFilter
+                    maxPrice={maxPrice}
+                    onChange={(value) => setMaxPrice(value)}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col gap-5">
+                <div className="flex justify-between items-center"></div>
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-5">
+              <div
+                id="results"
+                className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 flex-1"
+              >
+                {data
+                  ? data.data.map((listing) => (
+                      <div key={listing._id}>
+                        <SearchResultCard key={listing._id} listing={listing} />
+                      </div>
+                    ))
+                  : null}
+              </div>
+              <div>
+                <Pagination
+                  page_num={data.meta.page || 1}
+                  total_pages={data.meta.pages || 1}
+                  onPageChange={(newPage) => setPage(newPage)}
+                />
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

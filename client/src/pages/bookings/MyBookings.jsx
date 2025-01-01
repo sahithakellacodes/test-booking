@@ -25,7 +25,7 @@ const MyBookings = () => {
     <div className="text-slate-200">
       <div id="header">
         <div className="flex flex-row justify-between">
-          <h2 className="text-2xl text-slate-200 font-bold mb-5">
+          <h2 className="text-2xl text-slate-200 font-bold mb-4">
             My Bookings
           </h2>
         </div>

@@ -8,3 +8,7 @@ FindMyStay is a travel website that helps travellers find and book places to sta
 * Users can search, filter, and sort hotels as per their requirement. Search results are paginated to navigate through large search results.
 * Property owners can create, edit and delete their properties.
 * Travellers can make payments using Stripe.
+
+###### Test User Credentials
+email: testuser@findmystay.com \
+password: 12345678
