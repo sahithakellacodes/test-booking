@@ -4,10 +4,14 @@ import { useParams } from "react-router-dom";
 import * as fetchAPI from "../../fetchAPI";
 import { hotelTypes } from "../../config/hotelOptions";
 import GuestInfoForm from "../../forms/GuestInfoForm/GuestInfoForm";
+import MapComponent from "../../components/MapComponent";
+import { useEffect } from "react";
 
 const ListingDetails = () => {
   // Get the listingId from the URL
+  const [coordinates, setCoordinates] = React.useState(null);
   const { listingId } = useParams();
+  const API_KEY = import.meta.env.VITE_GOOGLE_MAP_API_KEY;
 
   // Get the listing details from the API using react query
   // Sometimes react rerenders the component multiple times before the listingId is available
@@ -20,7 +24,29 @@ const ListingDetails = () => {
     }
   );
 
-  if (data === undefined) {
+  const location = data?.city + data?.country;
+  const fetchCoordinates = async (location) => {
+    try {
+      const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+        location
+      )}&key=${API_KEY}`;
+      const response = await fetch(geocodeUrl);
+      const data = await response.json();
+      const { lat, lng } = data.results[0].geometry.location;
+      setCoordinates({ lat, lng });
+    } catch (error) {
+      console.log("Error fetching coordinates", error);
+    }
+  };
+
+  useEffect(() => {
+    if (location) {
+      fetchCoordinates(location);
+    }
+  }, [location, API_KEY]);
+
+  // If the data is not available, show a loading message
+  if (data === undefined || coordinates === null) {
     return <div>Loading...</div>;
   }
 
@@ -50,9 +76,9 @@ const ListingDetails = () => {
               className="rounded-md w-full h-72 object-cover object-center"
             />
           ))}
-          {/* {coordinates && (
-            <MapComponent location={} />
-          )} */}
+          {coordinates && (
+            <MapComponent location={coordinates} />
+          )}
         </div>
 
         <div id="facilities" className="">

@@ -1,50 +1,44 @@
-import { useEffect, useRef, useCallback } from "react";
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import React, { useState, useCallback } from "react";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 const containerStyle = {
-  width: "400px",
+  width: "100%",
   height: "400px",
 };
 
-const MapComponent = ({ lat, lng }) => {
-  const mapRef = useRef(null); // To store the map instance
-  const markerRef = useRef(null); // To store the marker instance
-
-  const center = {
-    lat: lat + 0.005 || 37.7749,
-    lng: lng + 0.005 || -122.4194,
-  };
-
-  const ApiKey = "AIzaSyBE98E5P6VzE2t3LrRnp724MUoAnt3NKy8";
+const MapComponent = ({ location }) => {
+  const { lat, lng } = location;
+  const [map, setMap] = useState(null);
 
   const onLoad = useCallback((map) => {
-    mapRef.current = map;
+    setMap(map);
+  }, []);
 
-    // Initialize the AdvancedMarkerElement
-    const marker = new google.maps.marker.AdvancedMarkerElement({
-      position: center,
-      map: map, // Attach to the map
-    });
+  const center = {
+    lat: lat || 37.7749,
+    lng: lng - 0.02 || -122.4194,
+  };
 
-    markerRef.current = marker;
-  }, [center]);
-
-  useEffect(() => {
-    // Update marker position dynamically if `lat` or `lng` changes
-    if (markerRef.current) {
-      markerRef.current.position = center;
-    }
-  }, [center]);
+  const ApiKey = import.meta.env.VITE_GOOGLE_MAP_API_KEY;
 
   return (
-    <LoadScript googleMapsApiKey={ApiKey} libraries={["marker"]}>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={13}
-        onLoad={onLoad}
-      />
-    </LoadScript>
+    <div>
+      <LoadScript googleMapsApiKey={ApiKey}>
+        <GoogleMap
+          mapContainerStyle={{ ...containerStyle, borderRadius: "0.375rem", height: "288px" }}
+          center={center}
+          zoom={11}
+          options={{
+            zoomControl: false,
+            streetViewControl: false,
+            mapTypeControl: false,
+            fullscreenControl: false, 
+          }}
+        >
+          <Marker position={center} />
+        </GoogleMap>
+      </LoadScript>
+    </div>
   );
 };
 
