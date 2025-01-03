@@ -19,7 +19,7 @@ const MapComponent = ({ location }) => {
     lng: lng - 0.02 || -122.4194,
   };
 
-  const ApiKey = import.meta.env.VITE_GOOGLE_MAP_API_KEY;
+  const ApiKey = import.meta.env.VITE_GOOGLE_MAP_API_KEY || "";
 
   return (
     <div>

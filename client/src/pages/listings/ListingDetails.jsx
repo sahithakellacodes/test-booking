@@ -11,7 +11,7 @@ const ListingDetails = () => {
   // Get the listingId from the URL
   const [coordinates, setCoordinates] = React.useState(null);
   const { listingId } = useParams();
-  const API_KEY = import.meta.env.VITE_GOOGLE_MAP_API_KEY;
+  const API_KEY = import.meta.env.VITE_GOOGLE_MAP_API_KEY || "";
 
   // Get the listing details from the API using react query
   // Sometimes react rerenders the component multiple times before the listingId is available
