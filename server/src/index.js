@@ -42,7 +42,7 @@ app.use(
   helmet.contentSecurityPolicy({
     useDefaults: true,
     directives: {
-      scriptSrc: ["'self'", "https://js.stripe.com"],
+      scriptSrc: ["'self'", "https://js.stripe.com", "https://maps.googleapis.com"],
       frameSrc: ["'self'", "https://js.stripe.com", "https://hooks.stripe.com"],
       imgSrc: ["'self'", "data:", "https://res.cloudinary.com"], // CSP for images from cloudinary
       connectSrc: [
