@@ -44,10 +44,10 @@ app.use(
     directives: {
       scriptSrc: ["'self'", "https://js.stripe.com", "https://maps.googleapis.com"],
       frameSrc: ["'self'", "https://js.stripe.com", "https://hooks.stripe.com"],
-      imgSrc: ["'self'", "data:", "https://res.cloudinary.com"], // CSP for images from cloudinary
+      imgSrc: ["'self'", "data:", "https://res.cloudinary.com", "https://maps.googleapis.com", "https://maps.gstatic.com"],
       connectSrc: [
         "'self'",
-        "https://maps.googleapis.com", // Allow Google Maps API
+        "https://maps.googleapis.com",
       ],
     },
   })
