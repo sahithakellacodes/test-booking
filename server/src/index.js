@@ -45,6 +45,10 @@ app.use(
       scriptSrc: ["'self'", "https://js.stripe.com"],
       frameSrc: ["'self'", "https://js.stripe.com", "https://hooks.stripe.com"],
       imgSrc: ["'self'", "data:", "https://res.cloudinary.com"], // CSP for images from cloudinary
+      connectSrc: [
+        "'self'",
+        "https://maps.googleapis.com", // Allow Google Maps API
+      ],
     },
   })
 );
