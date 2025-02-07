@@ -22,7 +22,7 @@ const Register = () => {
     onSuccess: async () => {
       showToast({ message: "Registered successfully!", type: "success" });
       // Invalidating queries triggers a refetch of the data, ensuring stale data is updated.
-      await queryClient.invalidateQueries("validateToken"); 
+      await queryClient.invalidateQueries("validateToken");
       navigate("/");
     },
     onError: (error) => {
@@ -36,12 +36,15 @@ const Register = () => {
 
   // Return the form
   return (
-    <form className="flex flex-col gap-5" onSubmit={onSubmit}>
-      <h2 className="text-3xl text-gray-200 font-bold">Create an account</h2>
-      <label className="text-gray-200 text-sm font-bold flex-1">
+    <form
+      className="flex flex-col p-6 gap-5 border rounded-lg shadow-xl shadow-gray-100 w-1/3 mx-auto"
+      onSubmit={onSubmit}
+    >
+      <h2 className="text-3xl  font-bold">Create an account</h2>
+      <label className=" text-sm font-bold flex-1">
         Username
         <input
-          className="border rounded w-full py-1 px-2 font-normal text-gray-200 bg-[#202225]"
+          className="border rounded w-full py-1 px-2 font-normal focus:outline-none focus:ring-1 focus:ring-gray-500"
           {...register("username", { required: "Username is required" })}
         ></input>
         {errors.username && (
@@ -50,11 +53,11 @@ const Register = () => {
           </span>
         )}
       </label>
-      <label className="text-gray-200 text-sm font-bold flex-1">
+      <label className=" text-sm font-bold flex-1">
         Email
         <input
           type="email"
-          className="border rounded w-full py-1 px-2 font-normal text-gray-200 bg-[#202225]"
+          className="border rounded w-full py-1 px-2 font-normal focus:outline-none focus:ring-1 focus:ring-gray-500"
           {...register("email", { required: "Email is required" })}
         ></input>
         {errors.email && (
@@ -63,11 +66,11 @@ const Register = () => {
           </span>
         )}
       </label>
-      <label className="text-gray-200 text-sm font-bold flex-1">
+      <label className=" text-sm font-bold flex-1">
         Password
         <input
           type="password"
-          className="border rounded w-full py-1 px-2 font-normal text-gray-200 bg-[#202225]"
+          className="border rounded w-full py-1 px-2 font-normal focus:outline-none focus:ring-1 focus:ring-gray-500"
           {...register("password", {
             required: "Password is required",
             minLength: {
@@ -82,11 +85,11 @@ const Register = () => {
           </span>
         )}
       </label>
-      <label className="text-gray-200 text-sm font-bold flex-1 ">
+      <label className=" text-sm font-bold flex-1">
         Confirm Password
         <input
           type="password"
-          className="border rounded w-full py-1 px-2 font-normal text-gray-200 bg-[#202225]"
+          className="border rounded w-full py-1 px-2 font-normal focus:outline-none focus:ring-1 focus:ring-gray-500"
           {...register("confirmPassword", {
             validate: (val) => {
               if (!val) {
@@ -104,7 +107,7 @@ const Register = () => {
         )}
       </label>
       <span className="flex justify-between">
-        <p className="font-light text-xs text-gray-200">
+        <p className="font-light text-xs ">
           Already registered?{" "}
           <a href="/user/login">
             <u>Login</u>
@@ -113,8 +116,7 @@ const Register = () => {
         </p>
         <button
           type="submit"
-          // className="bg-black text-white p-2 px-4 rounded-full"
-          className="bg-gray-200 text-black p-2 px-4 rounded-full disabled:opacity-50"
+          className="text-white bg-black rounded-md px-4 py-2 text-sm disabled:opacity-50"
         >
           Create Account
         </button>

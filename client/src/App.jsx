@@ -72,17 +72,17 @@ const App = () => {
             </Layout>
           }
         />
+        <Route
+          path="/listings/create"
+          element={
+            <Layout>
+              {isLoggedIn ? <AddListing /> : <Navigate to="/user/login" />}
+            </Layout>
+          }
+        />
 
         {isLoggedIn && ( // Routes available only to logged in users
           <>
-            <Route
-              path="/listings/create"
-              element={
-                <Layout>
-                  <AddListing />
-                </Layout>
-              }
-            />
             <Route
               path="/listings/viewAll"
               element={

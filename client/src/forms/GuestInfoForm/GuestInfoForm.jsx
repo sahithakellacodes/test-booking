@@ -66,8 +66,8 @@ const GuestInfoForm = ({ listingId, price }) => {
 
   // Return the guest info form
   return (
-    <div className="flex flex-col p-4 bg-[#13181C] gap-4  rounded-xl">
-      <h3 className="text-md font-bold text-slate-200">INR {price} per night</h3>
+    <div className="flex flex-col p-4  gap-4 border rounded-lg shadow-xl shadow-gray-50">
+      <h3 className="text-md font-bold">INR {price} per night</h3>
       {/* REVIEW: Not sure if this form submission is safe */}
       <form onSubmit={isLoggedIn ? handleSubmit(onSubmit) : handleSubmit(onSignInClick)}>
         <div className="grid grid-cols-1 gap-4 items-center">
@@ -82,7 +82,7 @@ const GuestInfoForm = ({ listingId, price }) => {
               minDate={minDate}
               maxDate={maxDate}
               placeholderText="Check-in Date"
-              className="min-w-full bg-white p-2 focus:outline-none"
+              className="min-w-full border p-2 mt-1 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 w-full"
               wrapperClassName="min-w-full"
             />
           </div>
@@ -97,20 +97,20 @@ const GuestInfoForm = ({ listingId, price }) => {
               minDate={minDate}
               maxDate={maxDate}
               placeholderText="Check-out Date"
-              className="min-w-full bg-white p-2 focus:outline-none"
+              className="min-w-full border p-2 mt-1 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 w-full"
               wrapperClassName="min-w-full"
             />
           </div>
           <div
             id="count"
-            className="p-2 rounded-md flex flex-row justify-between items-center text-slate-200"
+            className="p-2 rounded-md flex flex-row space-x-3 items-center"
           >
             <i className="fa-solid fa-user mr-2"></i>
-            <label className="items-center flex gap-1">
+            <label className="items-center flex gap-1 flex-grow">
               Adults:
               <input
                 type="number"
-                className="outline-none mx-2 text-black"
+                className="border p-2 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 w-full"
                 min={1}
                 max={20}
                 {...register("adultCount", {
@@ -123,11 +123,11 @@ const GuestInfoForm = ({ listingId, price }) => {
                 })}
               />
             </label>
-            <label className="items-center flex gap-1">
+            <label className="items-center flex gap-1 flex-grow">
               Children:
               <input
                 type="number"
-                className="outline-none mx-2 text-black"
+                className="border p-2 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 w-full"
                 min={0}
                 max={20}
                 {...register("childCount", {

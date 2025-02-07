@@ -78,14 +78,14 @@ const BookingForm = ({ userDetails, paymentIntentData }) => {
 
   return (
     <form
-      className="flex flex-col rounded-lg p-4 h-fit bg-[#13181C]"
+      className="flex flex-col rounded-lg p-4 h-fit border shadow-xl shadow-gray-50"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h2 className="text-2xl text-slate-200 font-bold mb-4">
+      <h2 className="text-2xl font-bold mb-4">
         Booking Confirmation
       </h2>
       <hr />
-      <label className="text-sm font-bold my-3 text-slate-200">
+      <label className="text-sm font-bold my-3 ">
         Username
         <input
           className="mt-1 text-gray-700 border rounded w-full py-2 px-3 bg-gray-200 font-normal"
@@ -95,7 +95,7 @@ const BookingForm = ({ userDetails, paymentIntentData }) => {
           {...register("username", { required: true })}
         />
       </label>
-      <label className="text-slate-200 text-sm font-bold my-3">
+      <label className=" text-sm font-bold my-3">
         Email
         <input
           className="mt-1 border rounded w-full py-2 px-3 text-gray-700 bg-gray-200 font-normal"
@@ -105,7 +105,7 @@ const BookingForm = ({ userDetails, paymentIntentData }) => {
           {...register("email", { required: true })}
         />
       </label>
-      <span className="font-semibold text-slate-200 text-lg">
+      <span className="font-semibold  text-lg">
         Your Price Summary
       </span>
       <div className="flex flex-col mb-4 p-4 bg-blue-100 rounded-lg">
@@ -117,15 +117,16 @@ const BookingForm = ({ userDetails, paymentIntentData }) => {
         <span className="font-light text-sm">inclusive of taxes</span>
       </div>
       <div className="space-y-2">
-        <h3 className="text-xl font-semibold text-slate-200">
+        <h3 className="text-xl font-semibold ">
           {" "}
           Payment Details
         </h3>
         <CardElement
           id="payment-element"
-          className="border rounded-md p-2 text-sm bg-slate-200"
+          // className="border rounded-md p-2 text-sm bg-slate-200"
+          className="border p-2 mt-1 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500"
         />
-        <div className="text-slate-200 p-2 flex justify-end">
+        <div className=" p-2 flex justify-end">
           <button
             type="submit"
             className="p-2 px-4 h-fit rounded-md bg-[#5870dd] hover:bg-[#3E56C4] text-white flex flex-row place-items-center gap-2 text-sm disabled:opacity-50"

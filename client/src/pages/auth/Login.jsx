@@ -37,14 +37,17 @@ const Login = () => {
 
   // Return the form
   return (
-    <form className="flex flex-col gap-5" onSubmit={onSubmit}>
-      <h2 className="text-3xl text-gray-200 font-bold">Login</h2>
-      <label className="text-gray-200 text-sm font-bold flex-1">
+    <form
+      className="flex flex-col p-6 gap-5 border rounded-lg shadow-xl shadow-gray-100 w-1/3 mx-auto"
+      onSubmit={onSubmit}
+    >
+      <h2 className="text-3xl  font-bold">Login</h2>
+      <label className="text-sm font-bold flex-1">
         Email
         <input
           type="email"
           autoComplete="email"
-          className="border rounded w-full py-1 px-2 font-normal text-gray-200 bg-[#202225]"
+          className="border rounded w-full py-1 px-2 font-normal focus:outline-none focus:ring-1 focus:ring-gray-500"
           {...register("email", { required: "Email is required" })}
         ></input>
         {errors.email && (
@@ -53,11 +56,11 @@ const Login = () => {
           </span>
         )}
       </label>
-      <label className="text-gray-200 text-sm font-bold flex-1">
+      <label className="text-sm font-bold flex-1">
         Password
         <input
           type="password"
-          className="border rounded w-full py-1 px-2 font-normal text-gray-200 bg-[#202225]"
+          className="border rounded w-full py-1 px-2 font-normal focus:outline-none focus:ring-1 focus:ring-gray-500"
           autoComplete="current-password"
           {...register("password", {
             required: "Password is required",
@@ -74,7 +77,7 @@ const Login = () => {
         )}
       </label>
       <span className="flex justify-between">
-        <p className="font-light text-xs text-gray-200">
+        <p className="font-light text-xs">
           Don't have an account?{" "}
           <a href="/user/register">
             <u>register</u>
@@ -84,7 +87,8 @@ const Login = () => {
         <button
           type="submit"
           // className="bg-black text-white p-2 px-4 rounded-full"
-          className="bg-gray-200 text-black p-2 px-4 rounded-full disabled:opacity-50"
+          // className="bg-gray-200 text-black p-2 px-4 rounded-full disabled:opacity-50"
+          className="text-white bg-black rounded-md px-4 py-2"
         >
           Login
         </button>

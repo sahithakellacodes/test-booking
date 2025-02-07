@@ -6,7 +6,6 @@ import LogoutButton from "./LogoutButton";
 const Navbar = () => {
   const { isLoggedIn } = useAppContext();
   const [menuToggle, setMenuToggle] = useState(false);
-  const navbarBGColor = "#2F3137"; // 31708e
   const menuStyle = "";
   const linkProps = {
     className: menuStyle,
@@ -18,15 +17,13 @@ const Navbar = () => {
   };
 
   return (
-    <div
-      style={{ backgroundColor: navbarBGColor }}
-      className="flex flex-col px-4 md:px-8"
-    >
+    <div className="flex flex-col px-4 md:px-8 bg-white border-b">
       <div className="py-3 px-4 md:px-8 flex flex-row justify-between place-items-center">
         <div className="navbar-start">
-          <span className="text-xl font-bold text-white">
-            <Link to="/">
+          <span className="text-xl font-bold">
+            <Link to="/" className="space-x-2">
               <i className="fa-regular fa-compass ease-in-out duration-300 hover:rotate-45"></i>
+              <span className="hidden lg:inline">FindMyStay</span>
             </Link>
           </span>
         </div>
@@ -34,7 +31,7 @@ const Navbar = () => {
           <span>
             <Link
               to="/listings/create"
-              className="font-semibold text-white p-2 px-4 rounded-full transition ease-in-out hover:bg-[#202225] "
+              className="font-normal text-[#484850] hover:text-black p-2 px-4 rounded-full transition ease-in-out"
             >
               List your property
             </Link>
@@ -46,7 +43,7 @@ const Navbar = () => {
               <span>
                 <Link
                   to="/bookings/viewAll"
-                  className="font-semibold text-white p-2 px-4 rounded-full transition ease-in-out hover:bg-[#202225] "
+                  className="bg-[#f6f6f6] rounded-md px-4 py-2"
                 >
                   My Bookings
                 </Link>
@@ -54,7 +51,7 @@ const Navbar = () => {
               <span>
                 <Link
                   to="/listings/viewAll"
-                  className="font-semibold text-white p-2 px-4 rounded-full transition ease-in-out hover:bg-[#202225] "
+                  className="bg-[#f6f6f6] rounded-md px-4 py-2"
                 >
                   My Listings
                 </Link>
@@ -65,20 +62,20 @@ const Navbar = () => {
             <>
               <Link
                 to="/user/register"
-                className="text-black bg-[#FFFDF2] p-1 px-2 border-[#FFFDF2] rounded-lg border-2"
+                className="bg-[#f6f6f6] rounded-md px-4 py-2"
               >
                 Register
               </Link>
               <Link
                 to="/user/login"
-                className="text-black bg-[#FFFDF2] p-1 px-2 border-[#FFFDF2] rounded-lg border-2"
+                className="text-white bg-black rounded-md px-4 py-2"
               >
                 Login
               </Link>
             </>
           )}
         </div>
-        <button onClick={handleMenuClick} className="text-slate-200 lg:hidden">
+        <button onClick={handleMenuClick} className="lg:hidden">
           {menuToggle ? (
             <i className="fa-solid fa-xmark"></i>
           ) : (
@@ -87,7 +84,7 @@ const Navbar = () => {
         </button>
       </div>
       {menuToggle && (
-        <div className="text-slate-200 flex flex-col items-center space-y-2 px-8 py-2">
+        <div className="flex flex-col items-center space-y-2 px-8 py-2 mb-4 font-light">
           {isLoggedIn ? (
             <>
               <span>

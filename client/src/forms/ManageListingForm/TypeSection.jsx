@@ -14,15 +14,15 @@ const TypeSection = () => {
   // Return the form
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-xl text-gray-200 font-bold mb-1">Property Type</h2>
+      <h2 className="text-xl font-bold mb-1">Property Type</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
         {hotelTypes.map((type) => (
           <label
             key={type.label}
             className={
               typeWatch === type.label
-                ? "cursor-pointer flex flex-col items-center border border-gray-300 rounded-lg p-4 text-black bg-gray-200"
-                : "cursor-pointer flex flex-col items-center border border-gray-300 rounded-lg p-4 text-gray-200"
+                ? "cursor-pointer flex flex-col items-center border rounded-lg p-4 text-gray-200 bg-slate-700"
+                : "cursor-pointer flex flex-col items-center border rounded-lg p-4"
             }
           >
             <input

@@ -52,12 +52,12 @@ const ListingDetails = () => {
 
   // Return the listing details and the guest info form
   return (
-    <div>
+    <div className="sm:mx-10">
       <div className="flex flex-col">
-        <div id="name-and-stars" className="flex justify-between mb-3">
-          <h3 className="font-bold text-xl text-[#cac9c9]">{data.name}</h3>
+        <div id="name-and-stars" className="flex justify-between mb-7">
+          <h3 className="font-bold text-xl">{data.name}</h3>
           <span>
-            <i className="mr-4 text-[#cac9c9]">{data.type}</i>
+            <i className="mr-4 font-light">{data.type}</i>
             {Array.from({ length: data.propertyRating }).map((_, index) => (
               <i key={index} className="fa-solid fa-star text-yellow-400"></i>
             ))}
@@ -66,7 +66,7 @@ const ListingDetails = () => {
 
         <div
           id="images-and-map"
-          className="grid grid-cols-1 md:grid-cols-3 gap-4"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8"
         >
           {data.images.slice(0, 2).map((image, index) => (
             <img
@@ -76,19 +76,20 @@ const ListingDetails = () => {
               className="rounded-md w-full h-72 object-cover object-center"
             />
           ))}
-          {coordinates && (
+          {coordinates ? (
+            <div className="m-auto">
+              <img className="w-6" src="https://i.gifer.com/ZKZg.gif"></img>
+            </div>
+          ) : (
             <MapComponent location={coordinates} />
           )}
         </div>
 
-        <div id="facilities" className="">
-          <ul className="m-1 grid grid-cols-2 md:grid-cols-4">
+        <div id="facilities" className="mb-8">
+          <ul className="grid grid-cols-2 md:grid-cols-4 gap-2">
             {/* TODO: Add facilities icons */}
             {data.facilities.map((item, index) => (
-              <li
-                key={index}
-                className="m-1 p-2 rounded-md border text-slate-200 duration-500 border-[#2F3137] bg-[#2F3137] hover:bg-[#13181C] hover:border-[#174157]"
-              >
+              <li key={index} className="p-3 rounded-md border font-light">
                 {item}
               </li>
             ))}
@@ -97,12 +98,9 @@ const ListingDetails = () => {
 
         <div
           id="desc-and-booking"
-          className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-3"
+          className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8"
         >
-          <div
-            id="description"
-            className="whitespace-pre-line text-justify text-[#cac9c9]"
-          >
+          <div id="description" className="whitespace-pre-line text-justify">
             {data.description}
           </div>
           <div id="booking-card" className="h-fit">

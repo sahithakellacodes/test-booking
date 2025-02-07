@@ -22,17 +22,13 @@ const MyListing = () => {
 
   const addListingButton =
     "border-2 border-blue-400 h-fit p-2 px-4 rounded-sm text-blue-400 font-semibold duration-300 hover:bg-blue-400 hover:text-white";
-  const black_btn =
-    "text-black border p-2 flex flex-row place-items-center gap-2 font-normal border-black rounded-full px-4 hover:bg-black hover:text-white";
-  const red_btn =
-    "text-red-600 border p-2 flex flex-row place-items-center gap-2 font-normal border-red-600 rounded-full px-4 hover:bg-red-600 hover:text-white";
 
   // Return the listings
   return (
     <div className="space-y-5">
       <div id="header">
         <div className="flex flex-row justify-between">
-          <h2 className="text-2xl text-slate-200 font-bold mb-2">
+          <h2 className="text-2xl font-bold mb-2">
             My Listings
           </h2>
           <Link to="/listings/create" className={addListingButton}>

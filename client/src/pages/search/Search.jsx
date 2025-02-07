@@ -89,11 +89,11 @@ const Search = () => {
   const validData = Array.isArray(data?.data) ? data.data : [];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5 mt-4">
+    <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5 mt-8 sm:mx-10">
       <div id="filters" className="rounded-lg h-fit top-10">
-        <div className="rounded-lg border border-slate-300 p-5 h-fit sticky top-10 hidden lg:block">
+        <div className="rounded-lg border shadow-xl shadow-gray-50 p-5 h-fit sticky top-10 hidden lg:block mt-8">
           <div className="space-y-5">
-            <h3 className="text-lg text-slate-200 font-semibold border-b border-slate-300 pb-5">
+            <h3 className="text-lg  font-semibold border-b  pb-5">
               Filter by:
             </h3>
             <PropertyRatingFilter
@@ -120,7 +120,7 @@ const Search = () => {
       </div>
       {validData.length === 0 ? (
         <div>
-          <span className="text-xl text-slate-200 font-semibold">
+          <span className="text-xl  font-semibold">
             No results found.
           </span>
         </div>
@@ -130,7 +130,7 @@ const Search = () => {
             id="result-cnt-and-sorting"
             className="flex flex-row justify-between items-center"
           >
-            <span className="text-xl text-slate-200 font-semibold">
+            <span className="text-xl font-semibold">
               {data.meta.total} results found{" "}
               {search.destination ? ` in ${search.destination}` : ""}
             </span>
@@ -161,10 +161,6 @@ const Search = () => {
             <div id="filters" className="rounded-lg h-fit top-10">
               <div className="rounded-lg border border-slate-300 p-5 h-fit sticky top-10">
                 <div className="space-y-5">
-                  {/* <SortingOption
-                    sortOption={sortOption}
-                    onChange={(event) => setSortOption(event.target.value)}
-                  /> */}
                   <h3 className="text-lg text-slate-200 font-semibold border-b border-slate-300 pb-5">
                     Filter by:
                   </h3>

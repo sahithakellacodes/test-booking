@@ -3,7 +3,7 @@ import React from "react";
 const PriceFilter = ({ maxPrice, onChange }) => {
   return (
     <div className="">
-      <h4 className="text-md font-semibold mb-2 text-slate-200">Max Price</h4>
+      <h4 className="text-md font-semibold mb-2 ">Max Price</h4>
       <select
       className="border rounded-md w-full"
         value={maxPrice}

@@ -9,11 +9,18 @@ const Pagination = ({ page_num, total_pages, onPageChange }) => {
   return (
     <div className="flex justify-center">
       <ul className="flex gap-2 ">
+        <button
+          onClick={() => onPageChange(page_num - 1)}
+          disabled={page_num === 1}
+          className="text-sm rounded-md w-10 h-10 hover:bg-[#F4F4F5]"
+        >
+          <i className="fa-solid fa-chevron-left text-xs"></i>
+        </button>
         {pageNumbers.map((number) => (
           <button
             key={number}
-            className={`flex rounded-sm items-center justify-center w-10 h-10 border-2 border-slate-300 ${
-              page_num === number ? "bg-slate-700 text-slate-200" : "text-slate-200"
+            className={`flex rounded-md items-center justify-center w-10 h-10 hover:bg-[#F4F4F5] ${
+              page_num === number ? "border" : ""
             }`}
             onClick={() => onPageChange(number)}
             disabled={page_num === number}
@@ -21,6 +28,13 @@ const Pagination = ({ page_num, total_pages, onPageChange }) => {
             {number}
           </button>
         ))}
+        <button
+          onClick={() => onPageChange(page_num + 1)}
+          disabled={page_num === total_pages}
+          className="text-sm rounded-md w-10 h-10 hover:bg-[#F4F4F5]"
+        >
+          <i className="fa-solid fa-chevron-right text-xs"></i>
+        </button>
       </ul>
     </div>
   );

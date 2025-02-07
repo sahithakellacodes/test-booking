@@ -22,8 +22,8 @@ const ImagesSection = () => {
   // Return the form
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-xl text-gray-200 font-bold mb-1">Add Property Images</h2>
-      <div className="border border-gray-300 rounded-lg p-4 flex-col gap-4">
+      <h2 className="text-xl font-bold mb-1">Add Property Images</h2>
+      <div className="border rounded-lg p-4 flex-col gap-4">
         {images && (
           <div>
             <div className="grid grid-cols-6 gap-4">
@@ -46,7 +46,7 @@ const ImagesSection = () => {
           type="file"
           multiple
           accept="image/*"
-          className="w-full text-gray-200 font-normal"
+          className="w-full font-normal"
           {...register("imageFiles", {
             validate: (imageFiles) => {
               const len = imageFiles.length + (images?.length || 0);
