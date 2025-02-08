@@ -21,11 +21,11 @@ const MyListing = () => {
   }
 
   const addListingButton =
-    "border-2 border-blue-400 h-fit p-2 px-4 rounded-sm text-blue-400 font-semibold duration-300 hover:bg-blue-400 hover:text-white";
+    "border-2 border-blue-400 h-fit p-2 px-3 rounded-md text-blue-400 font-semibold duration-300 hover:bg-blue-400 hover:text-white";
 
   // Return the listings
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 lg:mx-14">
       <div id="header">
         <div className="flex flex-row justify-between">
           <h2 className="text-2xl font-bold mb-2">

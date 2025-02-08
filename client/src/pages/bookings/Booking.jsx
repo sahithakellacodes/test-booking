@@ -56,7 +56,7 @@ const Booking = () => {
   if (paymentIntentData.isLoading) return <div className="text-slate-200">Loading...</div>;
   
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-3 w-4/5 lg:mx-auto">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-3 lg:w-4/5 lg:mx-auto">
       <BookingDetails search={search} listingDetails={listingDetails.data} />
       {userDetails && (
         <Elements

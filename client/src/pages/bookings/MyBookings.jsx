@@ -18,14 +18,14 @@ const MyBookings = () => {
   );
 
   if (isLoading) {
-    return <div className="text-slate-200">Loading...</div>;
+    return <div className="=">Loading...</div>;
   }
 
   return (
-    <div className="text-slate-200">
+    <div className="lg:mx-14">
       <div id="header">
         <div className="flex flex-row justify-between">
-          <h2 className="text-2xl text-slate-200 font-bold mb-4">
+          <h2 className="text-2xl font-bold mb-4">
             My Bookings
           </h2>
         </div>

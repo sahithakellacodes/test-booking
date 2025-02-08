@@ -19,7 +19,6 @@ const Search = () => {
   const [selectedFacilities, setSelectedFacilities] = React.useState([]);
   const [maxPrice, setMaxPrice] = React.useState();
   const [sortOption, setSortOption] = React.useState("");
-
   const [filterToggle, setFilterToggle] = React.useState(false);
 
   const handleToggle = () => {
@@ -88,41 +87,49 @@ const Search = () => {
   // Check if the data is a valid array
   const validData = Array.isArray(data?.data) ? data.data : [];
 
-  return (
-    <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5 mt-8 sm:mx-10">
-      <div id="filters" className="rounded-lg h-fit top-10">
-        <div className="rounded-lg border shadow-xl shadow-gray-50 p-5 h-fit sticky top-10 hidden lg:block mt-8">
-          <div className="space-y-5">
-            <h3 className="text-lg  font-semibold border-b  pb-5">
-              Filter by:
-            </h3>
-            <PropertyRatingFilter
-              selectedStars={selectedStars}
-              onChange={handleStarChange}
-            />
-            <ListingTypesFilter
-              selectedTypes={selectedTypes}
-              onChange={handleTypeChange}
-            />
-            <FacilitiesFilter
-              selectedFacilities={selectedFacilities}
-              onChange={handleFacilityChange}
-            />
-            <PriceFilter
-              maxPrice={maxPrice}
-              onChange={(value) => setMaxPrice(value)}
-            />
-          </div>
-        </div>
-        <div className="flex flex-col gap-5">
-          <div className="flex justify-between items-center"></div>
+  // Local components
+  const Filters = ({ style }) => (
+    <div id="filters" className="rounded-lg h-fit top-10">
+      <div className={style}>
+        <div className="space-y-5">
+          <h3 className="text-lg  font-semibold border-b  pb-5">Filter by:</h3>
+          <PropertyRatingFilter
+            selectedStars={selectedStars}
+            onChange={handleStarChange}
+          />
+          <ListingTypesFilter
+            selectedTypes={selectedTypes}
+            onChange={handleTypeChange}
+          />
+          <FacilitiesFilter
+            selectedFacilities={selectedFacilities}
+            onChange={handleFacilityChange}
+          />
+          <PriceFilter
+            maxPrice={maxPrice}
+            onChange={(value) => setMaxPrice(value)}
+          />
         </div>
       </div>
+    </div>
+  );
+  const CrossButton = () => (
+    <button onClick={handleToggle} className="text-slate-200 mr-2 lg:hidden">
+      <i className="fa-solid fa-xmark"></i>
+    </button>
+  );
+  const FilterButton = () => (
+    <button onClick={handleToggle} className="mr-2 lg:hidden">
+      <i className="fa-solid fa-filter"></i>
+    </button>
+  );
+
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5 mt-8 sm:mx-10">
+      <Filters style="rounded-lg border shadow-xl shadow-gray-50 p-5 h-fit sticky top-10 hidden lg:block mt-8" />
       {validData.length === 0 ? (
         <div>
-          <span className="text-xl  font-semibold">
-            No results found.
-          </span>
+          <span className="text-xl  font-semibold">No results found.</span>
         </div>
       ) : (
         <div id="body" className="flex flex-col gap-5">
@@ -141,51 +148,10 @@ const Search = () => {
               />
             </span>
             {/* Filter button for mobile */}
-            {filterToggle ? (
-              <button
-                onClick={handleToggle}
-                className="text-slate-200 mr-2 lg:hidden"
-              >
-                <i className="fa-solid fa-xmark"></i>
-              </button>
-            ) : (
-              <button
-                onClick={handleToggle}
-                className="text-slate-200 mr-2 lg:hidden"
-              >
-                <i className="fa-solid fa-filter"></i>
-              </button>
-            )}
+            {filterToggle ? <CrossButton /> : <FilterButton />}
           </div>
           {filterToggle ? (
-            <div id="filters" className="rounded-lg h-fit top-10">
-              <div className="rounded-lg border border-slate-300 p-5 h-fit sticky top-10">
-                <div className="space-y-5">
-                  <h3 className="text-lg text-slate-200 font-semibold border-b border-slate-300 pb-5">
-                    Filter by:
-                  </h3>
-                  <PropertyRatingFilter
-                    selectedStars={selectedStars}
-                    onChange={handleStarChange}
-                  />
-                  <ListingTypesFilter
-                    selectedTypes={selectedTypes}
-                    onChange={handleTypeChange}
-                  />
-                  <FacilitiesFilter
-                    selectedFacilities={selectedFacilities}
-                    onChange={handleFacilityChange}
-                  />
-                  <PriceFilter
-                    maxPrice={maxPrice}
-                    onChange={(value) => setMaxPrice(value)}
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col gap-5">
-                <div className="flex justify-between items-center"></div>
-              </div>
-            </div>
+            <Filters style="rounded-lg border border-slate-300 p-5 h-fit sticky top-10" />
           ) : (
             <div className="flex flex-col gap-5">
               <div
@@ -200,7 +166,7 @@ const Search = () => {
                     ))
                   : null}
               </div>
-              <div>
+              <div id="pagination">
                 <Pagination
                   page_num={data.meta.page || 1}
                   total_pages={data.meta.pages || 1}

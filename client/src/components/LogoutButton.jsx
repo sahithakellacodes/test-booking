@@ -14,8 +14,7 @@ const LogoutButton = () => {
   const mutation = useMutation(fetchAPI.logout, {
     onSuccess: async () => {
       showToast({ message: "Logout successful!", type: "success" });
-      // Invalidating queries triggers a refetch of the data, ensuring stale data is updated.
-      await queryClient.invalidateQueries("validateToken");
+      await queryClient.invalidateQueries("validateToken"); // Invalidating queries triggers a refetch of the data, ensuring stale data is updated.
       navigate("/");
     },
     onError: (error) => {

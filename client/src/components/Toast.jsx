@@ -5,7 +5,6 @@ const Toast = ({ message, type, onClose }) => {
   // Use useEffect to close the toast after 2 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
-      // setToast(undefined);
       onClose();
     }, 2000); // 2s
 
