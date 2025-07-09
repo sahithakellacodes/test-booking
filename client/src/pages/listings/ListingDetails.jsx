@@ -27,12 +27,13 @@ const ListingDetails = () => {
   const location = data?.city + data?.country;
   const fetchCoordinates = async (location) => {
     try {
-      const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
-        location
-      )}&key=${API_KEY}`;
-      const response = await fetch(geocodeUrl);
-      const data = await response.json();
-      const { lat, lng } = data.results[0].geometry.location;
+      // const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+      //   location
+      // )}&key=${API_KEY}`;
+      // const response = await fetch(geocodeUrl);
+      // const data = await response.json();
+      const lat = -20.18705;
+      const lng = 78.07116;
       setCoordinates({ lat, lng });
     } catch (error) {
       console.log("Error fetching coordinates", error);

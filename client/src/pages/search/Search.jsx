@@ -123,24 +123,30 @@ const Search = () => {
       <i className="fa-solid fa-filter"></i>
     </button>
   );
+  const NoResultsFound = () => (
+    <div>
+      <span className="text-xl  font-semibold">No results found.</span>
+    </div>
+  );
+  const ResultsCount = () => (
+    <span className="text-xl font-semibold">
+      {data.meta.total} results found{" "}
+      {search.destination ? ` in ${search.destination}` : ""}
+    </span>
+  );
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5 mt-8 sm:mx-10">
       <Filters style="rounded-lg border shadow-xl shadow-gray-50 p-5 h-fit sticky top-10 hidden lg:block mt-8" />
       {validData.length === 0 ? (
-        <div>
-          <span className="text-xl  font-semibold">No results found.</span>
-        </div>
+        <NoResultsFound />
       ) : (
         <div id="body" className="flex flex-col gap-5">
           <div
             id="result-cnt-and-sorting"
             className="flex flex-row justify-between items-center"
           >
-            <span className="text-xl font-semibold">
-              {data.meta.total} results found{" "}
-              {search.destination ? ` in ${search.destination}` : ""}
-            </span>
+            <ResultsCount />
             <span className="hidden lg:block">
               <SortingOption
                 sortOption={sortOption}
