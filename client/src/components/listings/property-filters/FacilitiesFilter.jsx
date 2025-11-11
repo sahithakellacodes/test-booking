@@ -1,5 +1,5 @@
 import React from 'react'
-import { hotelFacilities } from "../../../config/hotelOptions";
+import { hotelFacilities } from "../../../constants/hotelOptions";
 
 const FacilitiesFilter = ({ selectedFacilities, onChange }) => {
   return (

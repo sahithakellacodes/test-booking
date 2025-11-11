@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import * as fetchAPI from "../../fetchAPI";
-import { hotelTypes } from "../../config/hotelOptions";
+import { hotelTypes } from "../../constants/hotelOptions";
 import GuestInfoForm from "../../forms/GuestInfoForm/GuestInfoForm";
 import MapComponent from "../../components/ui/MapComponent";
 import { useEffect } from "react";
