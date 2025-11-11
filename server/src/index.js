@@ -33,11 +33,20 @@ mongoose
     });
   })
   .catch((err) => {
-    console.log("error connecting to DB");
+    console.log("error connecting to DB", err);
   });
 
 // Express configuration, cors configuration, and cookie-parser
 const app = express();
+app.use(express.json()); // converts body of API request to JSON
+app.use(express.urlencoded({ extended: true })); 
+
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
 app.use(
   helmet.contentSecurityPolicy({
     useDefaults: true,
@@ -55,15 +64,9 @@ app.use(
 app.use(helmet.crossOriginOpenerPolicy());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(helmet.hidePoweredBy());
-app.use(express.json());
+
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL,
-    credentials: true,
-  })
-);
+
 // Serve static files
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

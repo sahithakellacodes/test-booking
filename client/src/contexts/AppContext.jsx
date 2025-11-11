@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Toast from "../components/Toast";
+import Toast from "../components/ui/Toast";
 import { useQuery } from "react-query";
 import * as fetchAPI from "../fetchAPI";
 import { loadStripe } from "@stripe/stripe-js";

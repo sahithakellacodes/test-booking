@@ -8,7 +8,7 @@ const Banner = () => {
           Find your next stay
         </h1>
         <h1 className="text-xl font-extralight">
-          Search low prices on hotels, homes and much more.
+          Search low prices on hotels, homes and much more...
         </h1>
       </div>
     </div>

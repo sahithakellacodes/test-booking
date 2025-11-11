@@ -3,12 +3,12 @@ import { useSearchContext } from "../../contexts/SearchContext";
 import { useQuery } from "react-query";
 import * as fetchAPI from "../../fetchAPI";
 import SearchResultCard from "./SearchResultCard";
-import Pagination from "../../components/Pagination";
-import PropertyRatingFilter from "../../components/property-filters/PropertyRatingFilter";
-import ListingTypesFilter from "../../components/property-filters/ListingTypesFilter";
-import FacilitiesFilter from "../../components/property-filters/FacilitiesFilter";
-import PriceFilter from "../../components/property-filters/PriceFilter";
-import SortingOption from "../../components/property-filters/SortingOption";
+import Pagination from "../../components/ui/Pagination";
+import PropertyRatingFilter from "../../components/listings/property-filters/PropertyRatingFilter";
+import ListingTypesFilter from "../../components/listings/property-filters/ListingTypesFilter";
+import FacilitiesFilter from "../../components/listings/property-filters/FacilitiesFilter";
+import PriceFilter from "../../components/listings/property-filters/PriceFilter";
+import SortingOption from "../../components/listings/property-filters/SortingOption";
 
 const Search = () => {
   // Contexts and States

@@ -123,7 +123,6 @@ const BookingForm = ({ userDetails, paymentIntentData }) => {
         </h3>
         <CardElement
           id="payment-element"
-          // className="border rounded-md p-2 text-sm bg-slate-200"
           className="border p-2 mt-1 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500"
         />
         <div className=" p-2 flex justify-end">

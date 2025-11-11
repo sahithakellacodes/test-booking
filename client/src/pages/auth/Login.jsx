@@ -84,7 +84,7 @@ const Login = () => {
       <h2 className="text-3xl  font-bold">Login</h2>
       <EmailInput />
       <PasswordInput />
-      <span className="flex justify-between">
+      <span className="flex justify-between flex-col md:flex-row">
         <p className="font-light text-xs">
           Don't have an account?{" "}
           <a href="/user/register">
@@ -94,7 +94,7 @@ const Login = () => {
         </p>
         <button
           type="submit"
-          className="text-white bg-black rounded-md px-4 py-2"
+          className="text-white bg-black rounded-md px-4 py-2 mt-5 md:mt-0"
         >
           Login
         </button>

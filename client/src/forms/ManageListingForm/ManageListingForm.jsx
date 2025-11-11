@@ -23,6 +23,8 @@ const ManageListingForm = ({ onSave, isLoading, listingDetails }) => {
   const onSubmit = handleSubmit((data) => {
     // Create a form data object to send to the server
     const formData = new FormData();
+
+    // Append all the fields to the form data
     if (listingDetails) {
       formData.append("userId", listingDetails.userId);
     }
@@ -41,7 +43,7 @@ const ManageListingForm = ({ onSave, isLoading, listingDetails }) => {
       formData.append(`facilities[${index}]`, facility)
     );
 
-    // ????
+    // Append each image file to the form data
     if (formData.imageFiles) {
       formData.imageFiles.forEach((url, index) => {
         formData.append(`imageFiles[${index}]`, url);
@@ -60,7 +62,10 @@ const ManageListingForm = ({ onSave, isLoading, listingDetails }) => {
   // Return the form
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={onSubmit} className="flex flex-col p-6 gap-5 border rounded-lg shadow-xl shadow-gray-100 lg:w-4/5 mx-auto">
+      <form
+        onSubmit={onSubmit}
+        className="flex flex-col p-6 gap-5 border rounded-lg shadow-xl shadow-gray-100 lg:w-4/5 mx-auto"
+      >
         <BasicDetails />
         <br />
         <br />

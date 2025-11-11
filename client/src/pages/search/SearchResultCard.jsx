@@ -60,7 +60,6 @@ const SearchResultCard = ({ listing }) => {
           </span>
           <Link
             to={`/listing/details/${listing._id}`}
-            // className="p-2 px-4 h-fit rounded-md flex flex-row place-items-center gap-2 text-sm"
             className="border border-gray-200 p-2 px-4 text-sm rounded-md duration-100 ease-linear hover:bg-gray-100 hover:border-gray-100"
           >
             See availability{" "}

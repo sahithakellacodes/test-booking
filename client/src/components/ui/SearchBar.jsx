@@ -1,6 +1,5 @@
 import React from "react";
-import { useAppContext } from "../contexts/AppContext";
-import { useSearchContext } from "../contexts/SearchContext";
+import { useSearchContext } from "../../contexts/SearchContext";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";

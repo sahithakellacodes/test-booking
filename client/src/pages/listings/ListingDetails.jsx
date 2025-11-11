@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import * as fetchAPI from "../../fetchAPI";
 import { hotelTypes } from "../../config/hotelOptions";
 import GuestInfoForm from "../../forms/GuestInfoForm/GuestInfoForm";
-import MapComponent from "../../components/MapComponent";
+import MapComponent from "../../components/ui/MapComponent";
 import { useEffect } from "react";
 
 const ListingDetails = () => {

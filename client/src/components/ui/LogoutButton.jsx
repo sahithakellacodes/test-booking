@@ -1,7 +1,7 @@
 import React from "react";
-import * as fetchAPI from "../fetchAPI";
+import * as fetchAPI from "../../fetchAPI";
 import { useMutation, useQueryClient } from "react-query";
-import { useAppContext } from "../contexts/AppContext";
+import { useAppContext } from "../../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
 
 const LogoutButton = () => {
@@ -29,7 +29,7 @@ const LogoutButton = () => {
   // Return the button
   return (
     <button
-      className="text-white bg-black rounded-md px-4 py-1"
+      className="text-white bg-black rounded-md px-4 py-2"
       onClick={handleClick}
     >
       Logout

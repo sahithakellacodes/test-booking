@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as fetchAPI from "../../fetchAPI";
 import { useQuery } from "react-query";
-import MyListingCard from "../../components/MyListingCard";
+import MyListingCard from "../../components/listings/MyListingCard";
 
 const MyListing = () => {
   // Fetch all listings

@@ -9,7 +9,7 @@ import ListingDetails from "./pages/listings/ListingDetails";
 import EditListing from "./pages/listings/EditListing";
 import MyListing from "./pages/listings/MyListing";
 import { useAppContext } from "./contexts/AppContext";
-import SearchBar from "./components/SearchBar";
+import SearchBar from "./components/ui/SearchBar";
 import Search from "./pages/search/Search";
 import Booking from "./pages/bookings/Booking";
 import MyBookings from "./pages/bookings/MyBookings";

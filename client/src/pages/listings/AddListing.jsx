@@ -3,7 +3,6 @@ import ManageListingForm from "../../forms/ManageListingForm/ManageListingForm";
 import { useMutation } from "react-query";
 import { useAppContext } from "../../contexts/AppContext";
 import * as fetchAPI from "../../fetchAPI";
-import { useForm } from "react-hook-form";
 
 const AddListing = () => {
   // Get all the hooks we need

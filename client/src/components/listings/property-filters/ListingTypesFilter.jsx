@@ -1,5 +1,5 @@
 import React from "react";
-import { hotelTypes } from "../../config/hotelOptions";
+import { hotelTypes } from "../../../config/hotelOptions";
 
 const ListingTypesFilter = ({ selectedTypes, onChange }) => {
   return (

@@ -119,7 +119,7 @@ const Register = () => {
       <EmailInput />
       <PasswordInput />
       <ConfirmPasswordInput />
-      <span className="flex justify-between">
+      <span className="flex justify-between flex-col md:flex-row">
         <p className="font-light text-xs ">
           Already registered?{" "}
           <a href="/user/login">
@@ -129,7 +129,7 @@ const Register = () => {
         </p>
         <button
           type="submit"
-          className="text-white bg-black rounded-md px-4 py-2 text-sm disabled:opacity-50"
+          className="text-white bg-black rounded-md px-4 py-2 text-sm disabled:opacity-50 mt-5 md:mt-0"
         >
           Create Account
         </button>

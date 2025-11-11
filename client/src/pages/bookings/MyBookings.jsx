@@ -1,7 +1,7 @@
 import React from "react";
 import * as fetchAPI from "../../fetchAPI";
 import { useQuery } from "react-query";
-import BookingCard from "../../components/BookingCard";
+import BookingCard from "../../components/bookings/BookingCard";
 
 const MyBookings = () => {
   const { data: bookings, isLoading } = useQuery(
