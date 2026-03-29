@@ -1,7 +1,6 @@
 import express from "express";
 import Listing from "../models/listing.js";
 import User from "../models/user.js";
-// import constructSearchQuery from "../scripts/constructSearchQuery.js";
 import { pagination_page_size } from "../config.js";
 import { param, validationResult } from "express-validator";
 import Stripe from "stripe";

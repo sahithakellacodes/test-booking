@@ -47,6 +47,9 @@ app.use(
     credentials: true,
   })
 );
+
+// Helmet security configuration
+// This ensures protection against XSS without breaking functionality
 app.use(
   helmet.contentSecurityPolicy({
     useDefaults: true,
