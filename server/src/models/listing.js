@@ -93,10 +93,6 @@ const listingSchema = new Schema({
     type: Number,
     required: true,
   },
-  // freeCancellation: {
-  //   type: Boolean,
-  //   required: true,
-  // },
   images: [
     {
       type: String,

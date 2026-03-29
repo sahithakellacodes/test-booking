@@ -1,12 +1,12 @@
 import express from "express";
 import Listing from "../models/listing.js";
 import User from "../models/user.js";
-import { pagination_page_size } from "../constants.js";
+import { pagination_page_size } from "../constants/constants.js";
 import { param, validationResult } from "express-validator";
 import Stripe from "stripe";
 import verifyToken from "../middleware/auth.js";
-import { SORT_OPTIONS } from "../constants.js";
-import { constructSearchQuery } from "../utilities/constructSearchQuery.js";
+import { SORT_OPTIONS } from "../constants/constants.js";
+import { constructSearchQuery } from "../scripts/constructSearchQuery.js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const router = express.Router({ mergeParams: true });

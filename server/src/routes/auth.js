@@ -1,7 +1,6 @@
 import express from "express";
 import User from "../models/user.js";
 import bcrypt from "bcryptjs";
-// import jwt from "jsonwebtoken";
 import { check, validationResult } from "express-validator";
 import "dotenv/config";
 import createToken from "../scripts/createToken.js";

@@ -11,8 +11,6 @@ import { useAppContext } from "../../contexts/AppContext";
 
 const Booking = () => {
   const { stripePromise } = useAppContext();
-  const STRIPE_PUBLISHABLE_KEY =
-    import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || "";
 
   // Get the listingId from the URL
   const { listingId } = useParams();
