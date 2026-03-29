@@ -4,8 +4,7 @@ import cloudinary from "cloudinary";
 import "dotenv/config";
 import Listing from "../models/listing.js";
 import verifyToken from "../middleware/auth.js";
-import { check, body, validationResult } from "express-validator";
-import { json } from "stream/consumers";
+import { check, validationResult } from "express-validator";
 
 const router = express.Router({ mergeParams: true });
 router.use(express.json());

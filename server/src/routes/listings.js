@@ -1,13 +1,14 @@
 import express from "express";
 import Listing from "../models/listing.js";
 import User from "../models/user.js";
-import { pagination_page_size } from "../config.js";
+import { pagination_page_size } from "../constants.js";
 import { param, validationResult } from "express-validator";
 import Stripe from "stripe";
 import verifyToken from "../middleware/auth.js";
+import { SORT_OPTIONS } from "../constants.js";
+import { constructSearchQuery } from "../utilities/constructSearchQuery.js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
 const router = express.Router({ mergeParams: true });
 router.use(express.json());
 
@@ -29,16 +30,7 @@ router.get("/search", async (req, res) => {
     const query = constructSearchQuery(req.query);
 
     // sorting options
-    let sortOptions = {};
-    if (req.query.sortOption === "price-asc") {
-      sortOptions = { price: 1 };
-    } else if (req.query.sortOption === "price-desc") {
-      sortOptions = { price: -1 };
-    } else if (req.query.sortOption === "rating-desc") {
-      sortOptions = { propertyRating: -1 };
-    } else if (req.query.sortOption === "rating-asc") {
-      sortOptions = { propertyRating: 1 };
-    }
+    const sortOptions = SORT_OPTIONS[req.query.sortOption] || {};
 
     // pagination logic / meta data
     const page_size = pagination_page_size;
@@ -217,61 +209,5 @@ router.post("/:listingId/bookings", verifyToken, async (req, res) => {
     res.status(500).json({ message: "Something went wrong!" });
   }
 });
-
-// Construct search query based on query parameters
-const constructSearchQuery = (queryParams) => {
-  let constructedQuery = {};
-
-  if (queryParams.destination) {
-    constructedQuery.$or = [
-      { city: new RegExp(queryParams.destination, "i") },
-      { country: new RegExp(queryParams.destination, "i") },
-    ];
-  }
-
-  if (queryParams.adultCount) {
-    constructedQuery.adultCount = {
-      $gte: parseInt(queryParams.adultCount),
-    };
-  }
-
-  if (queryParams.childCount) {
-    constructedQuery.childCount = {
-      $gte: parseInt(queryParams.childCount),
-    };
-  }
-
-  if (queryParams.facilities) {
-    constructedQuery.facilities = {
-      $all: Array.isArray(queryParams.facilities)
-        ? queryParams.facilities
-        : [queryParams.facilities],
-    };
-  }
-
-  if (queryParams.types) {
-    constructedQuery.type = {
-      $in: Array.isArray(queryParams.types)
-        ? queryParams.types
-        : [queryParams.types],
-    };
-  }
-
-  if (queryParams.stars) {
-    const propertyRatings = Array.isArray(queryParams.stars)
-      ? queryParams.stars.map((star) => parseInt(star))
-      : parseInt(queryParams.stars);
-
-    constructedQuery.propertyRating = { $in: propertyRatings };
-  }
-
-  if (queryParams.maxPrice) {
-    constructedQuery.price = {
-      $lte: parseInt(queryParams.maxPrice),
-    };
-  }
-
-  return constructedQuery;
-};
 
 export default router;
