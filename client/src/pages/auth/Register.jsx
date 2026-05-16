@@ -5,6 +5,9 @@ import * as fetchAPI from "../../fetchAPI";
 import { useAppContext } from "../../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
 import EmailInput from "../../components/EmailInput";
+import PasswordInput from "@/components/PasswordInput";
+import UsernameInput from "@/components/UsernameInput";
+import ConfirmPasswordInput from "@/components/ConfirmPasswordInput";
 
 const Register = () => {
   // Get all the hooks we need

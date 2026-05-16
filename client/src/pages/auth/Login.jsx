@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as fetchAPI from "../../fetchAPI";
 import { useAppContext } from "../../contexts/AppContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useQueryClient, useMutation } from "react-query";
 import EmailInput from "../../components/EmailInput";
+import PasswordInput from "@/components/PasswordInput";
 
 const Login = () => {
   // Get all the hooks we need
