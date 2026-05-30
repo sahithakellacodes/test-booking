@@ -58,6 +58,10 @@ const BasicDetails = () => {
           className="border  rounded w-full py-1 px-2 font-normal  focus:border-blue-300 focus:outline-none"
           {...register("description", {
             required: "Property description is required",
+            maxLength: {
+              value: 2000,
+              message: "Description cannot exceed 500 characters",
+            },
           })}
         ></textarea>
         {errors.description && (
