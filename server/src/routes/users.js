@@ -45,17 +45,15 @@ router.post(
       if (!process.env.JWT_SECRET_KEY) {
         return res.status(500).json({ message: "Something went wrong" }); // JWT secret key is not defined
       }
-      // const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY, {
-      //   expiresIn: "1d",
-      // });
 
       // Create a token and send it to the user in a cookie
+      // we do not want to create a token before saving the user to the database because we need the 
+      // user id to create the token and the user id is generated after saving the user to the database
       const token = createToken(user);
 
       res.cookie("auth_token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        secure: false,
         maxAge: 1000 * 60 * 60 * 24,
       });
 

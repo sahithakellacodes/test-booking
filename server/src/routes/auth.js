@@ -44,11 +44,6 @@ router.post(
         because it can be used by attackers to guess the email addresses in the db
       */
 
-      // Access token
-      // const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY, {
-      //   expiresIn: "1d",
-      // });
-
       // Create a token and send it to the user in a cookie
       const token = createToken(user);
 

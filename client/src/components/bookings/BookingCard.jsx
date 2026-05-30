@@ -1,10 +1,11 @@
 import React from "react";
 import * as fetchAPI from "../../fetchAPI";
 import { useQuery } from "react-query";
+import { formatDate } from "../../scripts/formatDate";
 
 const BookingCard = ({ bookingData }) => {
   const { data: listingData, isLoading } = useQuery(
-    "getListingDetailsById",
+    ["getListingDetailsById", bookingData.listingId],
     () => fetchAPI.getListingDetailsById(bookingData.listingId),
     {
       onSuccess: (data) => {
@@ -13,7 +14,7 @@ const BookingCard = ({ bookingData }) => {
       onError: (error) => {
         console.log("Error fetching data");
       },
-    }
+    },
   );
 
   if (isLoading) {
@@ -28,11 +29,22 @@ const BookingCard = ({ bookingData }) => {
         <p>{listingData.country}</p>
       </div>
       <div>
-        <p>Booking ID: {bookingData._id}</p>
-        <p>Check-in: {bookingData.checkIn}</p>
-        <p>Check-out: {bookingData.checkOut}</p>
-        <p>Adults: {bookingData.adultCount}</p>
-        <p>Children: {bookingData.childCount}</p>
+        <p>
+          <b>Booking ID:</b> {bookingData._id}
+        </p>
+        <p>
+          <b>Check-in:</b>{" "}
+          {formatDate(bookingData.checkIn)}
+        </p>
+        <p>
+          <b>Check-out:</b> {formatDate(bookingData.checkOut)}
+        </p>
+        <p>
+          <b>Adults:</b> {bookingData.adultCount}
+        </p>
+        <p>
+          <b>Children:</b> {bookingData.childCount}
+        </p>
       </div>
     </div>
   );
